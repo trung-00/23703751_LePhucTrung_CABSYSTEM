@@ -1,6 +1,6 @@
 
 
-# 2. BÊN LIÊN QUAN HỆ THỐNG (STAKEHOLDERS)
+# . BÊN LIÊN QUAN HỆ THỐNG (STAKEHOLDERS)
 
 | Stakeholder                             | Vai trò                                                                                                       |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
@@ -9,31 +9,6 @@
 | **Nhân viên vận hành (Admin/Operator)** | Quản lý khách hàng, tài xế, chuyến đi, hỗ trợ xử lý sự cố và theo dõi hoạt động của hệ thống.                 |
 | **Ban Giám Đốc**                        | Sponsor dự án, định hướng phát triển hệ thống, theo dõi tiến độ triển khai và hiệu quả hoạt động kinh doanh.  |
 | **Bộ phận Kế toán**                     | Theo dõi doanh thu, quản lý và đối soát các giao dịch thanh toán.                                             |
-
-
----
-
-# 3. CHUYỂN ĐỔI YÊU CẦU KHÁCH HÀNG THÀNH MỤC TIÊU NGHIỆP VỤ
-
-Dựa trên các yêu cầu của khách hàng, hệ thống CAB được chuyển đổi thành các mục tiêu nghiệp vụ (Business Goals). Mỗi mục tiêu được định danh bằng mã **BG** nhằm thuận tiện cho việc quản lý, theo dõi và liên kết với các chức năng của hệ thống.
-
-| Mã BG     | Mục tiêu nghiệp vụ                                                                                                                      |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **BG-01** | Cho phép khách hàng tạo yêu cầu chuyến đi bằng cách nhập điểm đón và điểm đến hợp lệ.                                                   |
-| **BG-02** | Cho phép khách hàng lựa chọn và xác nhận tài xế được hệ thống đề xuất cho chuyến đi.                                                    |
-| **BG-03** | Tự động tìm kiếm và đề xuất tài xế phù hợp dựa trên trạng thái hoạt động, vị trí GPS và khu vực điểm đón.                               |
-| **BG-04** | Cho phép tài xế nhận hoặc từ chối chuyến trong thời gian quy định và tự động tìm tài xế khác khi từ chối hoặc hết thời gian chờ.        |
-| **BG-05** | Cho phép khách hàng theo dõi trạng thái chuyến đi và vị trí tài xế theo thời gian thực.                                                 |
-| **BG-06** | Cho phép tài xế cập nhật trạng thái chuyến đi trong suốt quá trình thực hiện chuyến.                                                    |
-| **BG-07** | Tự động xác định số tiền khách hàng cần thanh toán và tạo thông tin thanh toán cho chuyến đi.                                           |
-| **BG-08** | Cho phép khách hàng thực hiện thanh toán và quản lý trạng thái giao dịch.                                                               |
-| **BG-09** | Cho phép khách hàng xem lại lịch sử chuyến đi và thông tin thanh toán liên quan.                                                        |
-| **BG-10** | Hỗ trợ nhân viên vận hành quản lý khách hàng, tài xế, chuyến đi và xử lý các sự cố trong quá trình vận hành.                            |
-| **BG-11** | Cung cấp các báo cáo cơ bản về chuyến đi, doanh thu, khách hàng và tài xế để hỗ trợ quản lý.                                            |
-| **BG-12** | Đảm bảo hoạt động đặt xe và các chức năng chính của hệ thống vẫn được duy trì khi dịch vụ thanh toán hoặc thông báo gặp sự cố tạm thời. |
-
-
----
 
 ```mermaid
 flowchart TD
@@ -63,12 +38,37 @@ flowchart TD
     P --> Q[Hoàn thành chuyến]
     Q --> R[Trạng thái: HOAN_THANH]
 ```
+---
 
-# 4. PHẠM VI MODULE HỆ THỐNG (SYSTEM MODULES)
+# . CHUYỂN ĐỔI YÊU CẦU KHÁCH HÀNG THÀNH MỤC TIÊU NGHIỆP VỤ
+
+Dựa trên các yêu cầu của khách hàng, hệ thống CAB được chuyển đổi thành các mục tiêu nghiệp vụ (Business Goals). Mỗi mục tiêu được định danh bằng mã **BG** nhằm thuận tiện cho việc quản lý, theo dõi và liên kết với các chức năng của hệ thống.
+
+| Mã BG     | Mục tiêu nghiệp vụ                                                                                                                      |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **BG-01** | Cho phép khách hàng tạo yêu cầu chuyến đi bằng cách nhập điểm đón và điểm đến hợp lệ.                                                   |
+| **BG-02** | Cho phép khách hàng lựa chọn và xác nhận tài xế được hệ thống đề xuất cho chuyến đi.                                                    |
+| **BG-03** | Tự động tìm kiếm và đề xuất tài xế phù hợp dựa trên trạng thái hoạt động, vị trí GPS và khu vực điểm đón.                               |
+| **BG-04** | Cho phép tài xế nhận hoặc từ chối chuyến trong thời gian quy định và tự động tìm tài xế khác khi từ chối hoặc hết thời gian chờ.        |
+| **BG-05** | Cho phép khách hàng theo dõi trạng thái chuyến đi và vị trí tài xế theo thời gian thực.                                                 |
+| **BG-06** | Cho phép tài xế cập nhật trạng thái chuyến đi trong suốt quá trình thực hiện chuyến.                                                    |
+| **BG-07** | Tự động xác định số tiền khách hàng cần thanh toán và tạo thông tin thanh toán cho chuyến đi.                                           |
+| **BG-08** | Cho phép khách hàng thực hiện thanh toán và quản lý trạng thái giao dịch.                                                               |
+| **BG-09** | Cho phép khách hàng xem lại lịch sử chuyến đi và thông tin thanh toán liên quan.                                                        |
+| **BG-10** | Hỗ trợ nhân viên vận hành quản lý khách hàng, tài xế, chuyến đi và xử lý các sự cố trong quá trình vận hành.                            |
+| **BG-11** | Cung cấp các báo cáo cơ bản về chuyến đi, doanh thu, khách hàng và tài xế để hỗ trợ quản lý.                                            |
+| **BG-12** | Đảm bảo hoạt động đặt xe và các chức năng chính của hệ thống vẫn được duy trì khi dịch vụ thanh toán hoặc thông báo gặp sự cố tạm thời. |
+
+
+---
+
+
+
+# . PHẠM VI MODULE HỆ THỐNG (SYSTEM MODULES)
 
 Để đảm bảo dự án CAB System có thể hoàn thành trong thời gian 7 tuần, hệ thống được giới hạn trong 5 module chính.
 
-## 4.1. Module 1 - Quản lý Khách hàng (Customer Management)
+##  Module 1 - Quản lý Khách hàng (Customer Management)
 
 **Mục đích:**
 Quản lý tài khoản và thông tin cơ bản của khách hàng, phục vụ quá trình đặt xe và sử dụng dịch vụ.
@@ -84,7 +84,7 @@ Quản lý tài khoản và thông tin cơ bản của khách hàng, phục vụ
 |   5 | Quản lý trạng thái tài khoản |
 |   6 | Xem lịch sử chuyến đi        |
 
-## 4.2. Module 2 - Quản lý Tài xế (Driver Management)
+##  Module 2 - Quản lý Tài xế (Driver Management)
 
 **Mục đích:**
 Quản lý thông tin tài xế và trạng thái hoạt động, làm cơ sở cho việc tự động ghép tài xế với khách hàng.
@@ -103,7 +103,7 @@ Quản lý thông tin tài xế và trạng thái hoạt động, làm cơ sở 
 |   8 | Từ chối chuyến                       |
 |   9 | Xem lịch sử chuyến                   |
 
-## 4.3. Module 3 - Đặt xe & Ghép tài xế (Booking & Matching)
+## . Module 3 - Đặt xe & Ghép tài xế (Booking & Matching)
 
 **Mục đích:**
 Là module nghiệp vụ cốt lõi của CAB System, chịu trách nhiệm tiếp nhận yêu cầu đặt xe và tự động tìm tài xế phù hợp.
@@ -139,7 +139,7 @@ Là module nghiệp vụ cốt lõi của CAB System, chịu trách nhiệm ti�
 |   8 | HOAN_THANH          |
 |   9 | HUY_CHUYEN          |
 
-## 4.4. Module 4 - Theo dõi Chuyến & Thanh toán (Ride Tracking & Payment)
+## . Module 4 - Theo dõi Chuyến & Thanh toán (Ride Tracking & Payment)
 
 **Mục đích:**
 Quản lý quá trình thực hiện chuyến đi, cập nhật vị trí tài xế và xử lý thanh toán sau khi chuyến hoàn thành.
@@ -164,7 +164,7 @@ Quản lý quá trình thực hiện chuyến đi, cập nhật vị trí tài x
 | Thanh toán      |  14 | Lưu trạng thái giao dịch              |
 | Thanh toán      |  15 | Xử lý thanh toán thất bại             |
 
-## 4.5. Module 5 - Quản trị & Vận hành (Admin & Operation)
+##  Module 5 - Quản trị & Vận hành (Admin & Operation)
 
 **Mục đích:**
 Cung cấp công cụ cho nhân viên vận hành quản lý khách hàng, tài xế và giám sát chuyến đi.
@@ -200,7 +200,7 @@ Không triển khai các chức năng nâng cao như Loyalty, Voucher nâng cao,
 
 ---
 
-# 5. BUSINESS REQUIREMENTS (BR)
+#  BUSINESS REQUIREMENTS (BR)
 
 Phần này mô tả các yêu cầu nghiệp vụ mà hệ thống CAB System phải đáp ứng để hỗ trợ quy trình đặt xe, quản lý tài xế, theo dõi chuyến đi, thanh toán và vận hành hệ thống.
 
@@ -223,7 +223,7 @@ Phần này mô tả các yêu cầu nghiệp vụ mà hệ thống CAB System p
 
 ---
 
-# 5.2. CHI TIẾT BUSINESS REQUIREMENTS
+#  CHI TIẾT BUSINESS REQUIREMENTS
 
 ## BG-01 - Tạo yêu cầu chuyến đi
 
@@ -339,9 +339,9 @@ Hệ thống phải cho phép khách hàng xem lại lịch sử các chuyến �
 |   7 | Số tiền thanh toán    |
 |   8 | Trạng thái thanh toán |
 
-# 6. MÔ HÌNH HÓA NGHIỆP VỤ (BUSINESS PROCESS MODELING)
+#  MÔ HÌNH HÓA NGHIỆP VỤ (BUSINESS PROCESS MODELING)
 
-## 6.1. Tổng quan các quy trình nghiệp vụ
+##  Tổng quan các quy trình nghiệp vụ
 
 Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB có thể được mô hình hóa thành các quy trình nghiệp vụ chính sau:
 
@@ -360,7 +360,7 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 
 ---
 
-## 6.2. Quy trình tạo yêu cầu chuyến đi
+##  Quy trình tạo yêu cầu chuyến đi
 
 **Mục đích:** Cho phép khách hàng tạo một yêu cầu chuyến đi bằng cách cung cấp điểm đón và điểm đến.
 
@@ -386,11 +386,11 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 
 ---
 
-## 6.3. Quy trình tự động ghép và xác nhận tài xế
+## . Quy trình tự động ghép và xác nhận tài xế
 
 **Mục đích:** Tìm kiếm tài xế phù hợp và thực hiện xác nhận chuyến đi.
 
-### 6.3.1. Tiêu chí tìm kiếm tài xế
+###  Tiêu chí tìm kiếm tài xế
 
 | STT | Tiêu chí                            |
 | --: | ----------------------------------- |
@@ -399,7 +399,7 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 |   3 | Tài xế có vị trí GPS hợp lệ         |
 |   4 | Tài xế phù hợp với khu vực điểm đón |
 
-### 6.3.2. Luồng nghiệp vụ
+### Luồng nghiệp vụ
 
 | Bước | Hoạt động                                                                 |
 | ---: | ------------------------------------------------------------------------- |
@@ -414,11 +414,11 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 
 ---
 
-## 6.4. Quy trình theo dõi và thực hiện chuyến đi
+## Quy trình theo dõi và thực hiện chuyến đi
 
 **Mục đích:** Cho phép khách hàng theo dõi thông tin chuyến đi và vị trí tài xế theo thời gian thực.
 
-### 6.4.1. Thông tin được hiển thị
+### Thông tin được hiển thị
 
 | STT | Thông tin                  |
 | --: | -------------------------- |
@@ -428,7 +428,7 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 |   4 | Điểm đón                   |
 |   5 | Điểm đến                   |
 
-### 6.4.2. Luồng cập nhật trạng thái
+###  Luồng cập nhật trạng thái
 
 | STT | Trạng thái      |
 | --: | --------------- |
@@ -454,7 +454,7 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 
 ---
 
-## 6.5. Quy trình thanh toán chuyến đi
+## Quy trình thanh toán chuyến đi
 
 **Mục đích:** Cho phép khách hàng thanh toán và hệ thống quản lý trạng thái giao dịch.
 
@@ -515,7 +515,7 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 
 ---
 
-## 6.7. Tổng hợp luồng nghiệp vụ chính
+##  Tổng hợp luồng nghiệp vụ chính
 
 | Bước | Quy trình                       | Trạng thái / Kết quả             |
 | ---: | ------------------------------- | -------------------------------- |
