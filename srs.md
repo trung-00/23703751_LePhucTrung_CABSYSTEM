@@ -540,350 +540,434 @@ Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB
 | Khách hàng hoặc tài xế hủy | Chuyến chuyển sang HUY_CHUYEN               |
 
 
-# 7. SYSTEM REQUIREMENTS (SR)
+### 7. System Requirements
 
-Phần này chuyển các Business Requirements (BR) thành các System Requirements (SR) cụ thể mà hệ thống CAB System phải đáp ứng. Mỗi SR được liên kết với Business Goal và Business Requirement tương ứng nhằm đảm bảo khả năng truy xuất từ mục tiêu nghiệp vụ đến chức năng hệ thống.
+| Mã SR     | System Requirement                                                                                                     |
+| --------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **SR-01** | Hệ thống cho phép nhập và lưu điểm đón.                                                                                |
+| **SR-02** | Hệ thống cho phép nhập và lưu điểm đến.                                                                                |
+| **SR-03** | Hệ thống kiểm tra tính hợp lệ của điểm đón và điểm đến.                                                                |
+| **SR-04** | Hệ thống tạo yêu cầu đặt xe và lưu trạng thái yêu cầu.                                                                 |
+| **SR-05** | Hệ thống hiển thị danh sách tài xế được đề xuất.                                                                       |
+| **SR-06** | Hệ thống cho phép khách hàng chọn tài xế.                                                                              |
+| **SR-07** | Hệ thống cho phép khách hàng xác nhận tài xế đã chọn.                                                                  |
+| **SR-08** | Hệ thống xác định tài xế đang trực tuyến và sẵn sàng nhận chuyến.                                                      |
+| **SR-09** | Hệ thống nhận và cập nhật vị trí GPS của tài xế.                                                                       |
+| **SR-10** | Hệ thống xác định tài xế phù hợp dựa trên khu vực và vị trí hiện tại.                                                  |
+| **SR-11** | Hệ thống gửi yêu cầu chuyến xe đến tài xế phù hợp.                                                                     |
+| **SR-12** | Hệ thống cho phép tài xế chấp nhận chuyến xe.                                                                          |
+| **SR-13** | Hệ thống cho phép tài xế từ chối chuyến xe.                                                                            |
+| **SR-14** | Hệ thống tự động xử lý trường hợp tài xế không phản hồi trong thời gian quy định.                                      |
+| **SR-15** | Hệ thống tự động tìm tài xế khác khi chuyến xe bị từ chối hoặc hết thời gian phản hồi.                                 |
+| **SR-16** | Hệ thống hiển thị trạng thái chuyến xe theo thời gian thực.                                                            |
+| **SR-17** | Hệ thống cập nhật vị trí tài xế trong quá trình thực hiện chuyến xe.                                                   |
+| **SR-18** | Hệ thống hiển thị vị trí tài xế trên bản đồ cho khách hàng.                                                            |
+| **SR-19** | Hệ thống hiển thị thông tin tài xế, điểm đón và điểm đến của chuyến xe.                                                |
+| **SR-20** | Hệ thống cho phép tài xế cập nhật trạng thái chuyến xe.                                                                |
+| **SR-21** | Hệ thống kiểm tra tính hợp lệ khi chuyển đổi trạng thái chuyến xe.                                                     |
+| **SR-22** | Hệ thống cho phép hủy chuyến xe theo điều kiện được quy định.                                                          |
+| **SR-23** | Hệ thống tự động tính toán giá cước chuyến xe.                                                                         |
+| **SR-24** | Hệ thống xác định và hiển thị số tiền khách hàng cần thanh toán.                                                       |
+| **SR-25** | Hệ thống cho phép khách hàng lựa chọn phương thức thanh toán.                                                          |
+| **SR-26** | Hệ thống tạo giao dịch thanh toán cho chuyến xe.                                                                       |
+| **SR-27** | Hệ thống tiếp nhận kết quả xử lý thanh toán từ đơn vị cung cấp dịch vụ thanh toán.                                     |
+| **SR-28** | Hệ thống lưu trạng thái giao dịch gồm PENDING, SUCCESS hoặc FAILED.                                                    |
+| **SR-29** | Hệ thống không lưu trữ thông tin nhạy cảm của thẻ thanh toán.                                                          |
+| **SR-30** | Hệ thống cho phép khách hàng xem lịch sử các chuyến xe.                                                                |
+| **SR-31** | Hệ thống hiển thị thông tin chi tiết của từng chuyến xe trong lịch sử.                                                 |
+| **SR-32** | Hệ thống hiển thị thông tin thanh toán tương ứng với chuyến xe.                                                        |
+| **SR-33** | Hệ thống cho phép nhân viên vận hành quản lý thông tin khách hàng.                                                     |
+| **SR-34** | Hệ thống cho phép nhân viên vận hành quản lý thông tin tài xế.                                                         |
+| **SR-35** | Hệ thống cho phép nhân viên vận hành xem danh sách và chi tiết chuyến xe.                                              |
+| **SR-36** | Hệ thống cho phép nhân viên vận hành theo dõi các chuyến xe đang hoạt động.                                            |
+| **SR-37** | Hệ thống cung cấp số liệu tổng số chuyến xe.                                                                           |
+| **SR-38** | Hệ thống cung cấp số liệu chuyến xe hoàn thành và bị hủy.                                                              |
+| **SR-39** | Hệ thống cung cấp số liệu doanh thu.                                                                                   |
+| **SR-40** | Hệ thống cho phép nhân viên vận hành xem thông tin giao dịch thanh toán.                                               |
+| **SR-41** | Hệ thống ghi nhận lỗi khi dịch vụ thanh toán hoặc thông báo tạm thời không hoạt động.                                  |
+| **SR-42** | Hệ thống đảm bảo không mất yêu cầu đặt xe khi dịch vụ bên thứ ba tạm thời bị gián đoạn.                                |
+| **SR-43** | Hệ thống vẫn duy trì các chức năng đặt xe và quản lý chuyến xe khi dịch vụ thanh toán hoặc thông báo gặp lỗi tạm thời. |
+| **SR-44** | Hệ thống cho phép thực hiện lại giao dịch thanh toán sau khi dịch vụ được khôi phục.                                   |
 
-## 7.1. Ma trận Business Goal – Business Requirement – System Requirement
+## 8. Business Rules
 
-| Business Goal | Business Requirement                   | Mã SR     | System Requirement                                                                                 |
-| ------------- | -------------------------------------- | --------- | -------------------------------------------------------------------------------------------------- |
-| **BG-01**     | Cho phép khách hàng tạo yêu cầu chuyến | **SR-01** | Hệ thống phải cho phép khách hàng nhập điểm đón hợp lệ.                                            |
-| **BG-01**     | Cho phép khách hàng tạo yêu cầu chuyến | **SR-02** | Hệ thống phải cho phép khách hàng nhập điểm đến hợp lệ.                                            |
-| **BG-01**     | Cho phép khách hàng tạo yêu cầu chuyến | **SR-03** | Hệ thống phải kiểm tra tính hợp lệ của điểm đón và điểm đến trước khi tạo chuyến.                  |
-| **BG-01**     | Cho phép khách hàng tạo yêu cầu chuyến | **SR-04** | Hệ thống phải tạo yêu cầu đặt xe và gán trạng thái TIM_TAI_XE khi thông tin hợp lệ.                |
-| **BG-02**     | Khách hàng lựa chọn và xác nhận tài xế | **SR-05** | Hệ thống phải hiển thị tài xế được hệ thống đề xuất cho khách hàng.                                |
-| **BG-02**     | Khách hàng lựa chọn và xác nhận tài xế | **SR-06** | Hệ thống phải cho phép khách hàng lựa chọn tài xế được đề xuất.                                    |
-| **BG-02**     | Khách hàng lựa chọn và xác nhận tài xế | **SR-07** | Hệ thống phải cho phép khách hàng xác nhận tài xế đã lựa chọn.                                     |
-| **BG-03**     | Tự động tìm kiếm tài xế                | **SR-08** | Hệ thống phải tìm các tài xế đang Online và Available.                                             |
-| **BG-03**     | Tự động tìm kiếm tài xế                | **SR-09** | Hệ thống phải kiểm tra vị trí GPS của tài xế.                                                      |
-| **BG-03**     | Tự động tìm kiếm tài xế                | **SR-10** | Hệ thống phải lựa chọn tài xế phù hợp với khu vực điểm đón.                                        |
-| **BG-03**     | Tự động tìm kiếm tài xế                | **SR-11** | Hệ thống phải gửi đề xuất chuyến đến tài xế phù hợp.                                               |
-| **BG-04**     | Tài xế nhận hoặc từ chối chuyến        | **SR-12** | Hệ thống phải cho phép tài xế chấp nhận yêu cầu chuyến.                                            |
-| **BG-04**     | Tài xế nhận hoặc từ chối chuyến        | **SR-13** | Hệ thống phải cho phép tài xế từ chối yêu cầu chuyến.                                              |
-| **BG-04**     | Tài xế nhận hoặc từ chối chuyến        | **SR-14** | Hệ thống phải xác định Timeout khi tài xế không phản hồi trong thời gian quy định.                 |
-| **BG-04**     | Tài xế nhận hoặc từ chối chuyến        | **SR-15** | Hệ thống phải thực hiện Retry khi tài xế từ chối hoặc Timeout.                                     |
-| **BG-05**     | Theo dõi chuyến đi                     | **SR-16** | Hệ thống phải hiển thị trạng thái hiện tại của chuyến đi cho khách hàng.                           |
-| **BG-05**     | Theo dõi chuyến đi                     | **SR-17** | Hệ thống phải cập nhật vị trí GPS hiện tại của tài xế.                                             |
-| **BG-05**     | Theo dõi chuyến đi                     | **SR-18** | Hệ thống phải hiển thị vị trí tài xế cho khách hàng.                                               |
-| **BG-05**     | Theo dõi chuyến đi                     | **SR-19** | Hệ thống phải hiển thị thông tin tài xế, điểm đón và điểm đến.                                     |
-| **BG-06**     | Cập nhật trạng thái chuyến             | **SR-20** | Hệ thống phải cho phép tài xế cập nhật trạng thái chuyến.                                          |
-| **BG-06**     | Cập nhật trạng thái chuyến             | **SR-21** | Hệ thống phải kiểm soát việc chuyển đổi trạng thái chuyến theo trình tự nghiệp vụ.                 |
-| **BG-06**     | Cập nhật trạng thái chuyến             | **SR-22** | Hệ thống phải cho phép chuyến chuyển sang HUY_CHUYEN khi khách hàng hoặc tài xế hủy theo quy định. |
-| **BG-07**     | Tự động tính cước                      | **SR-23** | Hệ thống phải tự động tính cước dựa trên thông tin chuyến đi.                                      |
-| **BG-07**     | Tự động tính cước                      | **SR-24** | Hệ thống phải cung cấp số tiền cần thanh toán cho khách hàng.                                      |
-| **BG-08**     | Thanh toán chuyến                      | **SR-25** | Hệ thống phải cho phép khách hàng lựa chọn phương thức thanh toán.                                 |
-| **BG-08**     | Thanh toán chuyến                      | **SR-26** | Hệ thống phải tạo giao dịch thanh toán cho chuyến đi.                                              |
-| **BG-08**     | Thanh toán chuyến                      | **SR-27** | Hệ thống phải nhận kết quả từ Payment Provider.                                                    |
-| **BG-08**     | Thanh toán chuyến                      | **SR-28** | Hệ thống phải lưu trạng thái PENDING, SUCCESS hoặc FAILED của giao dịch.                           |
-| **BG-08**     | Thanh toán chuyến                      | **SR-29** | Hệ thống không được lưu thông tin thẻ thanh toán nhạy cảm.                                         |
-| **BG-09**     | Xem lịch sử chuyến                     | **SR-30** | Hệ thống phải cho phép khách hàng xem danh sách lịch sử chuyến đi.                                 |
-| **BG-09**     | Xem lịch sử chuyến                     | **SR-31** | Hệ thống phải hiển thị mã chuyến, thời gian, điểm đón, điểm đến và tài xế.                         |
-| **BG-09**     | Xem lịch sử chuyến                     | **SR-32** | Hệ thống phải hiển thị trạng thái chuyến và thông tin thanh toán.                                  |
-| **BG-10**     | Quản lý và giám sát vận hành           | **SR-33** | Hệ thống phải cho phép nhân viên vận hành quản lý thông tin khách hàng.                            |
-| **BG-10**     | Quản lý và giám sát vận hành           | **SR-34** | Hệ thống phải cho phép nhân viên vận hành quản lý thông tin tài xế.                                |
-| **BG-10**     | Quản lý và giám sát vận hành           | **SR-35** | Hệ thống phải cho phép nhân viên vận hành xem danh sách và chi tiết chuyến đi.                     |
-| **BG-10**     | Quản lý và giám sát vận hành           | **SR-36** | Hệ thống phải cho phép nhân viên vận hành theo dõi các chuyến đang hoạt động.                      |
-| **BG-11**     | Báo cáo vận hành                       | **SR-37** | Hệ thống phải cung cấp số lượng chuyến đi.                                                         |
-| **BG-11**     | Báo cáo vận hành                       | **SR-38** | Hệ thống phải cung cấp số lượng chuyến hoàn thành và chuyến hủy.                                   |
-| **BG-11**     | Báo cáo vận hành                       | **SR-39** | Hệ thống phải cung cấp thông tin doanh thu.                                                        |
-| **BG-11**     | Báo cáo vận hành                       | **SR-40** | Hệ thống phải cho phép nhân viên vận hành xem thông tin giao dịch.                                 |
-| **BG-12**     | Xử lý sự cố dịch vụ                    | **SR-41** | Hệ thống phải ghi nhận sự cố khi Payment Provider hoặc Notification Service không hoạt động.       |
-| **BG-12**     | Xử lý sự cố dịch vụ                    | **SR-42** | Hệ thống phải đảm bảo không làm mất thông tin yêu cầu chuyến khi dịch vụ phụ trợ gặp sự cố.        |
-| **BG-12**     | Xử lý sự cố dịch vụ                    | **SR-43** | Hệ thống phải duy trì các chức năng đặt xe chính khi dịch vụ phụ trợ tạm thời không khả dụng.      |
-| **BG-12**     | Xử lý sự cố dịch vụ                    | **SR-44** | Hệ thống phải cho phép xử lý lại giao dịch sau khi dịch vụ thanh toán được khôi phục.              |
+| Mã Rule     | Business Rule                                                                                            |
+| ----------- | -------------------------------------------------------------------------------------------------------- |
+| **RULE-01** | Khách hàng phải cung cấp đầy đủ điểm đón và điểm đến trước khi đặt xe.                                   |
+| **RULE-02** | Điểm đón và điểm đến phải hợp lệ để hệ thống tạo yêu cầu đặt xe.                                         |
+| **RULE-03** | Chỉ tài xế đang trực tuyến và sẵn sàng nhận chuyến mới được đưa vào danh sách tìm kiếm.                  |
+| **RULE-04** | Tài xế được đề xuất phải phù hợp với vị trí và khu vực của chuyến xe.                                    |
+| **RULE-05** | Một chuyến xe chỉ được xác nhận cho một tài xế tại một thời điểm.                                        |
+| **RULE-06** | Tài xế phải phản hồi yêu cầu chuyến xe trong thời gian quy định.                                         |
+| **RULE-07** | Khi tài xế từ chối hoặc không phản hồi, hệ thống phải tìm tài xế khác.                                   |
+| **RULE-08** | Trạng thái chuyến xe phải được cập nhật theo đúng trình tự nghiệp vụ.                                    |
+| **RULE-09** | Chỉ tài xế được phân công mới có quyền cập nhật trạng thái chuyến xe.                                    |
+| **RULE-10** | Giá cước phải được hệ thống tự động tính dựa trên thông tin chuyến xe.                                   |
+| **RULE-11** | Số tiền thanh toán phải tương ứng với giá cước của chuyến xe.                                            |
+| **RULE-12** | Mỗi giao dịch thanh toán phải gắn với một chuyến xe cụ thể.                                              |
+| **RULE-13** | Giao dịch thanh toán phải có trạng thái PENDING, SUCCESS hoặc FAILED.                                    |
+| **RULE-14** | Không được lưu trữ thông tin nhạy cảm của thẻ thanh toán trên hệ thống.                                  |
+| **RULE-15** | Khách hàng chỉ được xem lịch sử các chuyến xe thuộc tài khoản của mình.                                  |
+| **RULE-16** | Nhân viên vận hành được quyền quản lý thông tin khách hàng, tài xế và chuyến xe theo quyền hạn được cấp. |
+| **RULE-17** | Chỉ nhân viên vận hành có quyền xem và quản lý các chuyến xe đang hoạt động.                             |
+| **RULE-18** | Doanh thu được tính dựa trên các giao dịch thanh toán hợp lệ.                                            |
+| **RULE-19** | Khi dịch vụ thanh toán hoặc thông báo bị gián đoạn, hệ thống không được làm mất yêu cầu đặt xe.          |
+| **RULE-20** | Các giao dịch thanh toán thất bại có thể được thực hiện lại khi dịch vụ thanh toán được khôi phục.       |
 
----
+## 9. Nghiệp vụ phi chức năng
 
-# 7.2. Thiết kế chức năng nghiệp vụ và System Requirement
+| Mã NFR     | Nghiệp vụ phi chức năng                                                                                          |
+| ---------- | ---------------------------------------------------------------------------------------------------------------- |
+| **NFR-01** | Hệ thống phải có thời gian phản hồi nhanh đối với các thao tác đặt xe, tìm tài xế và cập nhật trạng thái.        |
+| **NFR-02** | Hệ thống phải hỗ trợ cập nhật vị trí tài xế gần như theo thời gian thực trong quá trình thực hiện chuyến xe.     |
+| **NFR-03** | Hệ thống phải đảm bảo tính sẵn sàng của các chức năng đặt xe và quản lý chuyến xe.                               |
+| **NFR-04** | Hệ thống phải đảm bảo dữ liệu yêu cầu đặt xe không bị mất khi dịch vụ bên thứ ba tạm thời gián đoạn.             |
+| **NFR-05** | Hệ thống phải bảo vệ thông tin tài khoản và dữ liệu cá nhân của khách hàng, tài xế.                              |
+| **NFR-06** | Hệ thống phải phân quyền truy cập phù hợp với từng nhóm người dùng.                                              |
+| **NFR-07** | Hệ thống phải bảo mật thông tin và giao dịch thanh toán, không lưu trữ dữ liệu thẻ nhạy cảm.                     |
+| **NFR-08** | Hệ thống phải đảm bảo tính toàn vẹn và nhất quán của dữ liệu chuyến xe và giao dịch.                             |
+| **NFR-09** | Hệ thống phải có khả năng xử lý nhiều yêu cầu đặt xe đồng thời mà không làm gián đoạn hoạt động.                 |
+| **NFR-10** | Hệ thống phải ghi nhận và lưu trữ nhật ký các lỗi và sự kiện quan trọng để phục vụ việc kiểm tra và xử lý sự cố. |
+| **NFR-11** | Giao diện hệ thống phải dễ sử dụng, rõ ràng và phù hợp với thao tác trên máy tính và thiết bị di động.           |
+| **NFR-12** | Hệ thống phải có khả năng mở rộng để đáp ứng số lượng khách hàng, tài xế và chuyến xe tăng trong tương lai.      |
+| **NFR-13** | Hệ thống phải đảm bảo khả năng khôi phục dữ liệu và hoạt động sau khi xảy ra sự cố hệ thống.                     |
+| **NFR-14** | Hệ thống phải tương thích với các trình duyệt web phổ biến.                                                      |
+| **NFR-15** | Hệ thống phải duy trì hoạt động ổn định trong suốt thời gian cung cấp dịch vụ.                                   |
 
-## PBM-01 – Đặt xe
+## 10. Xác định Entity và Mô hình thực thể kết hợp
 
-**Business Goal:** BG-01
-**Business Requirement:** BR-01
+### 10.1. Xác định các Entity
 
-Quy trình đặt xe bao gồm các chức năng:
+| Mã Entity | Entity          | Mô tả                                             |
+| --------- | --------------- | ------------------------------------------------- |
+| **E01**   | Customer        | Lưu thông tin khách hàng sử dụng dịch vụ đặt xe.  |
+| **E02**   | Driver          | Lưu thông tin tài xế cung cấp dịch vụ vận chuyển. |
+| **E03**   | Vehicle         | Lưu thông tin phương tiện của tài xế.             |
+| **E04**   | Booking         | Lưu thông tin yêu cầu đặt xe của khách hàng.      |
+| **E05**   | Ride            | Lưu thông tin chuyến xe được thực hiện.           |
+| **E06**   | Location        | Lưu thông tin điểm đón và điểm đến.               |
+| **E07**   | Payment         | Lưu thông tin giao dịch thanh toán.               |
+| **E08**   | Driver_Location | Lưu vị trí GPS của tài xế.                        |
+| **E09**   | Notification    | Lưu thông tin thông báo liên quan đến chuyến xe.  |
+| **E10**   | Employee        | Lưu thông tin nhân viên vận hành hệ thống.        |
 
-```text
-PBM-01: ĐẶT XE
-       │
-       ├── Chọn điểm đón
-       │       └── SR-01
-       │
-       ├── Chọn điểm đến
-       │       └── SR-02
-       │
-       ├── Kiểm tra thông tin
-       │       └── SR-03
-       │
-       └── Tạo yêu cầu đặt xe
-               └── SR-04
-```
+### 10.2. Mối quan hệ giữa các Entity
 
----
+| Entity 1 | Quan hệ        | Entity 2        | Cardinality |
+| -------- | -------------- | --------------- | ----------- |
+| Customer | tạo            | Booking         | 1:N         |
+| Booking  | sử dụng        | Location        | N:1         |
+| Booking  | được phân công | Driver          | N:1         |
+| Driver   | sở hữu/sử dụng | Vehicle         | 1:N         |
+| Booking  | tạo thành      | Ride            | 1:1         |
+| Driver   | thực hiện      | Ride            | 1:N         |
+| Ride     | có             | Payment         | 1:1         |
+| Driver   | cập nhật       | Driver_Location | 1:N         |
+| Customer | nhận           | Notification    | 1:N         |
+| Driver   | nhận           | Notification    | 1:N         |
+| Employee | quản lý        | Customer        | 1:N         |
+| Employee | quản lý        | Driver          | 1:N         |
+| Employee | quản lý        | Ride            | 1:N         |
 
-## PBM-02 – Lựa chọn và xác nhận tài xế
-
-**Business Goal:** BG-02
-**Business Requirement:** BR-02
-
-```text
-PBM-02: XÁC NHẬN TÀI XẾ
-       │
-       ├── Hiển thị tài xế đề xuất
-       │       └── SR-05
-       │
-       ├── Khách hàng lựa chọn tài xế
-       │       └── SR-06
-       │
-       └── Xác nhận tài xế
-               └── SR-07
-```
-
----
-
-## PBM-03 – Tìm tài xế
-
-**Business Goal:** BG-03
-**Business Requirement:** BR-03
-
-```text
-PBM-03: TÌM TÀI XẾ
-       │
-       ├── Kiểm tra Online / Offline
-       │       └── SR-08
-       │
-       ├── Kiểm tra Available / Busy
-       │       └── SR-08
-       │
-       ├── Kiểm tra GPS
-       │       └── SR-09
-       │
-       ├── Kiểm tra khu vực điểm đón
-       │       └── SR-10
-       │
-       └── Gửi đề xuất chuyến
-               └── SR-11
-```
-
----
-
-## PBM-04 – Xử lý phản hồi tài xế
-
-**Business Goal:** BG-04
-**Business Requirement:** BR-04
-
-```text
-PBM-04: PHẢN HỒI TÀI XẾ
-       │
-       ├── Accept
-       │     └── SR-12
-       │
-       ├── Reject
-       │     └── SR-13
-       │
-       ├── Timeout
-       │     └── SR-14
-       │
-       └── Retry
-             └── SR-15
-```
-
----
-
-## PBM-05 – Theo dõi chuyến
-
-**Business Goal:** BG-05
-**Business Requirement:** BR-05
-
-```text
-PBM-05: THEO DÕI CHUYẾN
-       │
-       ├── Hiển thị trạng thái chuyến
-       │       └── SR-16
-       │
-       ├── Cập nhật GPS tài xế
-       │       └── SR-17
-       │
-       ├── Hiển thị vị trí tài xế
-       │       └── SR-18
-       │
-       └── Hiển thị thông tin chuyến
-               └── SR-19
-```
-
----
-
-## PBM-06 – Cập nhật trạng thái chuyến
-
-**Business Goal:** BG-06
-**Business Requirement:** BR-06
-
-```text
-PBM-06: CẬP NHẬT TRẠNG THÁI
-       │
-       ├── DA_NHAN_CHUYEN
-       │
-       ├── DA_DEN_DIEM_DON
-       │
-       ├── DA_DON_KHACH
-       │
-       ├── DANG_DI_CHUYEN
-       │
-       ├── HOAN_THANH
-       │
-       └── HUY_CHUYEN
-                │
-                └── SR-20, SR-21, SR-22
-```
-
----
-
-## PBM-07 – Tính cước
-
-**Business Goal:** BG-07
-**Business Requirement:** BR-07
-
-```text
-PBM-07: TÍNH CƯỚC
-       │
-       ├── Nhận thông tin chuyến
-       │
-       ├── Tính cước
-       │       └── SR-23
-       │
-       └── Trả số tiền cần thanh toán
-               └── SR-24
-```
-
----
-
-## PBM-08 – Thanh toán
-
-**Business Goal:** BG-08
-**Business Requirement:** BR-08
-
-```text
-PBM-08: THANH TOÁN
-       │
-       ├── Chọn phương thức thanh toán
-       │       └── SR-25
-       │
-       ├── Tạo giao dịch
-       │       └── SR-26
-       │
-       ├── Gửi Payment Provider
-       │       └── SR-27
-       │
-       └── Lưu trạng thái
-               └── SR-28
-```
-
----
-
-# 7.3. Ánh xạ System Requirement với chức năng/API
-
-Các chức năng nghiệp vụ có thể được thiết kế thành các API của hệ thống như sau:
-
-| SR    | Chức năng                  | API đề xuất                  | Method |
-| ----- | -------------------------- | ---------------------------- | ------ |
-| SR-01 | Chọn điểm đón              | `/api/locations/pickup`      | POST   |
-| SR-02 | Chọn điểm đến              | `/api/locations/dropoff`     | POST   |
-| SR-04 | Tạo yêu cầu đặt xe         | `/api/bookings`              | POST   |
-| SR-05 | Lấy tài xế được đề xuất    | `/api/bookings/{id}/drivers` | GET    |
-| SR-06 | Chọn tài xế                | `/api/bookings/{id}/driver`  | PUT    |
-| SR-07 | Xác nhận tài xế            | `/api/bookings/{id}/confirm` | PUT    |
-| SR-08 | Tìm tài xế Available       | `/api/drivers/available`     | GET    |
-| SR-09 | Lấy vị trí GPS             | `/api/drivers/{id}/location` | GET    |
-| SR-11 | Gửi đề xuất chuyến         | `/api/rides/{id}/proposal`   | POST   |
-| SR-12 | Tài xế nhận chuyến         | `/api/rides/{id}/accept`     | POST   |
-| SR-13 | Tài xế từ chối chuyến      | `/api/rides/{id}/reject`     | POST   |
-| SR-15 | Retry tìm tài xế           | `/api/matching/retry`        | POST   |
-| SR-16 | Xem trạng thái chuyến      | `/api/rides/{id}/status`     | GET    |
-| SR-17 | Cập nhật GPS               | `/api/drivers/{id}/location` | PUT    |
-| SR-20 | Cập nhật trạng thái chuyến | `/api/rides/{id}/status`     | PUT    |
-| SR-23 | Tính cước                  | `/api/fares/calculate`       | POST   |
-| SR-25 | Lấy phương thức thanh toán | `/api/payment-methods`       | GET    |
-| SR-26 | Tạo giao dịch              | `/api/payments`              | POST   |
-| SR-27 | Gửi thanh toán             | `/api/payments/{id}/process` | POST   |
-| SR-28 | Xem trạng thái giao dịch   | `/api/payments/{id}`         | GET    |
-| SR-30 | Xem lịch sử chuyến         | `/api/customers/{id}/rides`  | GET    |
-| SR-35 | Xem danh sách chuyến       | `/api/admin/rides`           | GET    |
-| SR-40 | Xem giao dịch              | `/api/admin/payments`        | GET    |
-
-> **Lưu ý:** Các API trên là thiết kế ở mức đề xuất để chuyển System Requirement thành chức năng kỹ thuật. Đây chưa phải danh sách API triển khai thực tế.
-
----
-
-# 7.4. Sơ đồ phân rã yêu cầu hệ thống
+### 10.3. Mô hình thực thể kết hợp (ERD)
 
 ```mermaid
-flowchart TD
+erDiagram
+    CUSTOMER ||--o{ BOOKING : creates
+    LOCATION ||--o{ BOOKING : used_for
+    DRIVER ||--o{ BOOKING : assigned
+    DRIVER ||--o{ VEHICLE : uses
+    BOOKING ||--|| RIDE : creates
+    DRIVER ||--o{ RIDE : performs
+    RIDE ||--|| PAYMENT : has
+    DRIVER ||--o{ DRIVER_LOCATION : updates
+    CUSTOMER ||--o{ NOTIFICATION : receives
+    DRIVER ||--o{ NOTIFICATION : receives
+    EMPLOYEE ||--o{ CUSTOMER : manages
+    EMPLOYEE ||--o{ DRIVER : manages
+    EMPLOYEE ||--o{ RIDE : manages
 
-    BG[BUSINESS GOAL]
+    CUSTOMER {
+        int CustomerID PK
+        string FullName
+        string Phone
+        string Email
+    }
 
-    BG --> BR[BUSINESS REQUIREMENT]
-    BR --> PBM[PBM<br/>Business Process Model]
-    PBM --> SR[SYSTEM REQUIREMENT]
-    SR --> F[CHỨC NĂNG NGHIỆP VỤ]
-    F --> API[API]
-    API --> DB[(DATABASE)]
+    DRIVER {
+        int DriverID PK
+        string FullName
+        string Phone
+        string Status
+    }
 
-    BG --> BG1[BG-01 → BG-12]
+    VEHICLE {
+        int VehicleID PK
+        int DriverID FK
+        string VehicleType
+        string LicensePlate
+    }
 
-    BG1 --> BR1[BR-01 → BR-12]
+    BOOKING {
+        int BookingID PK
+        int CustomerID FK
+        int DriverID FK
+        int LocationID FK
+        datetime BookingTime
+        string Status
+    }
 
-    BR1 --> P1[PBM-01 → PBM-12]
+    RIDE {
+        int RideID PK
+        int BookingID FK
+        int DriverID FK
+        decimal Fare
+        string Status
+    }
 
-    P1 --> SR1[SR-01 → SR-44]
+    LOCATION {
+        int LocationID PK
+        string PickupAddress
+        string DropoffAddress
+    }
 
-    SR1 --> F1[Chức năng hệ thống]
+    PAYMENT {
+        int PaymentID PK
+        int RideID FK
+        decimal Amount
+        string PaymentMethod
+        string Status
+    }
 
-    F1 --> API1[REST API]
+    DRIVER_LOCATION {
+        int DriverLocationID PK
+        int DriverID FK
+        decimal Latitude
+        decimal Longitude
+        datetime RecordedAt
+    }
 
-    API1 --> DB
+    NOTIFICATION {
+        int NotificationID PK
+        int CustomerID FK
+        int DriverID FK
+        string Content
+        datetime CreatedAt
+    }
+
+    EMPLOYEE {
+        int EmployeeID PK
+        string FullName
+        string Role
+    }
 ```
 
----
+@startuml
+left to right direction
 
-# 7.5. Ví dụ hoàn chỉnh: Đặt xe
+actor Customer
+actor Driver
+actor Operator
+actor Management
+actor Accounting
+actor "Payment Provider" as Payment
+actor "Notification Provider" as Notification
 
-```text
-BG-01
-Tạo yêu cầu chuyến
-        ↓
-BR-01
-Cho phép khách hàng tạo yêu cầu
-        ↓
-PBM-01
-Đặt xe
-        ↓
-┌─────────────────────────────┐
-│ Chọn điểm đón               │
-│        ↓                    │
-│ SR-01                       │
-│        ↓                    │
-│ Chọn điểm đến               │
-│        ↓                    │
-│ SR-02                       │
-│        ↓                    │
-│ Kiểm tra thông tin          │
-│        ↓                    │
-│ SR-03                       │
-│        ↓                    │
-│ Tạo yêu cầu đặt xe          │
-│        ↓                    │
-│ SR-04                       │
-└─────────────────────────────┘
-        ↓
-POST /api/bookings
-        ↓
-Booking Database
-```
+rectangle "CAB System" {
 
-Như vậy **Mục 7 không chỉ là liệt kê SR**, mà nó tạo được đường truy xuất rất rõ:
+  usecase "Đăng ký tài khoản" as UC01
+  usecase "Đăng nhập" as UC02
+  usecase "Đặt xe" as UC03
+  usecase "Chọn điểm đón" as UC04
+  usecase "Chọn điểm đến" as UC05
+  usecase "Chọn loại xe" as UC06
+  usecase "Tìm tài xế" as UC07
+  usecase "Chọn tài xế" as UC08
+  usecase "Xác nhận chuyến xe" as UC09
+  usecase "Theo dõi chuyến xe" as UC10
+  usecase "Thanh toán" as UC11
+  usecase "Xem lịch sử chuyến xe" as UC12
+  usecase "Hủy chuyến xe" as UC13
 
-**BG → BR → PBM → SR → Function → API → Database**
+  usecase "Nhận yêu cầu chuyến xe" as UC14
+  usecase "Chấp nhận chuyến xe" as UC15
+  usecase "Từ chối chuyến xe" as UC16
+  usecase "Cập nhật trạng thái chuyến xe" as UC17
+  usecase "Cập nhật vị trí GPS" as UC18
 
-Đây là cách trình bày phù hợp với hướng bạn đang làm ở các mục trước.
+  usecase "Quản lý khách hàng" as UC19
+  usecase "Quản lý tài xế" as UC20
+  usecase "Quản lý chuyến xe" as UC21
+  usecase "Theo dõi chuyến xe đang hoạt động" as UC22
+  usecase "Quản lý giao dịch" as UC23
+  usecase "Xem báo cáo" as UC24
+}
+
+Customer --> UC01
+Customer --> UC02
+Customer --> UC03
+Customer --> UC10
+Customer --> UC11
+Customer --> UC12
+Customer --> UC13
+
+UC03 .> UC04 : <<include>>
+UC03 .> UC05 : <<include>>
+UC03 .> UC06 : <<include>>
+UC03 .> UC07 : <<include>>
+UC03 .> UC08 : <<include>>
+UC03 .> UC09 : <<include>>
+
+Driver --> UC02
+Driver --> UC14
+Driver --> UC15
+Driver --> UC16
+Driver --> UC17
+Driver --> UC18
+
+Operator --> UC02
+Operator --> UC19
+Operator --> UC20
+Operator --> UC21
+Operator --> UC22
+Operator --> UC23
+Operator --> UC24
+
+Management --> UC24
+Accounting --> UC23
+Accounting --> UC24
+
+UC11 --> Payment
+UC10 --> Notification
+UC14 --> Notification
+
+@enduml
+
+
+## 11. Acceptance Criteria
+
+### 11.1. Bảng tiêu chí chấp nhận
+
+| Mã AC     | SR liên quan | Tiêu chí chấp nhận                                                                                                      |
+| --------- | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| **AC-01** | SR-01        | Khi khách hàng nhập điểm đón hợp lệ, hệ thống phải lưu và hiển thị chính xác điểm đón.                                  |
+| **AC-02** | SR-02        | Khi khách hàng nhập điểm đến hợp lệ, hệ thống phải lưu và hiển thị chính xác điểm đến.                                  |
+| **AC-03** | SR-03        | Khi điểm đón hoặc điểm đến không hợp lệ, hệ thống phải thông báo lỗi và không tạo yêu cầu đặt xe.                       |
+| **AC-04** | SR-04        | Khi thông tin đặt xe hợp lệ, hệ thống phải tạo booking và gán trạng thái ban đầu cho booking.                           |
+| **AC-05** | SR-05        | Hệ thống phải hiển thị danh sách các tài xế phù hợp với yêu cầu đặt xe.                                                 |
+| **AC-06** | SR-06        | Khách hàng phải có thể chọn một tài xế từ danh sách được đề xuất.                                                       |
+| **AC-07** | SR-07        | Sau khi khách hàng xác nhận, hệ thống phải lưu tài xế được chọn cho booking.                                            |
+| **AC-08** | SR-08        | Chỉ tài xế có trạng thái trực tuyến và sẵn sàng mới được hệ thống xem xét để nhận chuyến.                               |
+| **AC-09** | SR-09        | Khi tài xế thay đổi vị trí, hệ thống phải nhận và cập nhật tọa độ GPS mới.                                              |
+| **AC-10** | SR-10        | Hệ thống phải lựa chọn tài xế dựa trên vị trí và trạng thái sẵn sàng.                                                   |
+| **AC-11** | SR-11        | Hệ thống phải gửi yêu cầu chuyến xe đến tài xế được lựa chọn/phù hợp.                                                   |
+| **AC-12** | SR-12        | Khi tài xế chấp nhận, trạng thái yêu cầu phải được cập nhật thành đã chấp nhận/xác nhận theo quy trình.                 |
+| **AC-13** | SR-13        | Khi tài xế từ chối, hệ thống phải ghi nhận việc từ chối và xử lý tìm tài xế khác.                                       |
+| **AC-14** | SR-14        | Nếu tài xế không phản hồi trong thời gian quy định, hệ thống phải tự động xử lý yêu cầu hết thời gian.                  |
+| **AC-15** | SR-15        | Khi tài xế từ chối hoặc hết thời gian phản hồi, hệ thống phải thực hiện lại quá trình tìm tài xế theo quy định.         |
+| **AC-16** | SR-16        | Khách hàng phải nhìn thấy trạng thái hiện tại của chuyến xe và trạng thái phải được cập nhật khi có thay đổi.           |
+| **AC-17** | SR-17        | Trong quá trình chuyến xe diễn ra, vị trí tài xế phải được cập nhật trên hệ thống.                                      |
+| **AC-18** | SR-18        | Khách hàng phải có thể xem vị trí hiện tại của tài xế trên bản đồ.                                                      |
+| **AC-19** | SR-19        | Hệ thống phải hiển thị đúng thông tin tài xế, điểm đón và điểm đến của chuyến xe.                                       |
+| **AC-20** | SR-20        | Tài xế phải có thể cập nhật trạng thái chuyến xe theo các trạng thái được hệ thống cho phép.                            |
+| **AC-21** | SR-21        | Khi tài xế thực hiện chuyển trạng thái không hợp lệ, hệ thống phải từ chối thao tác và thông báo lỗi.                   |
+| **AC-22** | SR-22        | Khi khách hàng hủy chuyến trong điều kiện cho phép, hệ thống phải cập nhật chuyến xe thành trạng thái đã hủy.           |
+| **AC-23** | SR-23        | Với cùng một thông tin chuyến xe, hệ thống phải tính giá cước theo công thức được quy định và trả về kết quả.           |
+| **AC-24** | SR-24        | Hệ thống phải hiển thị số tiền khách hàng cần thanh toán và số tiền phải khớp với giá cước của chuyến xe.               |
+| **AC-25** | SR-25        | Khách hàng phải có thể lựa chọn một phương thức thanh toán hợp lệ.                                                      |
+| **AC-26** | SR-26        | Khi thực hiện thanh toán, hệ thống phải tạo một giao dịch gắn với đúng chuyến xe.                                       |
+| **AC-27** | SR-27        | Hệ thống phải tiếp nhận và xử lý được kết quả thanh toán từ Payment Provider.                                           |
+| **AC-28** | SR-28        | Hệ thống phải lưu đúng một trong các trạng thái PENDING, SUCCESS hoặc FAILED cho giao dịch.                             |
+| **AC-29** | SR-29        | Kiểm tra dữ liệu lưu trữ phải đảm bảo hệ thống không lưu thông tin thẻ nhạy cảm.                                        |
+| **AC-30** | SR-30        | Khách hàng phải có thể xem danh sách các chuyến xe thuộc tài khoản của mình.                                            |
+| **AC-31** | SR-31        | Chi tiết chuyến xe phải hiển thị đầy đủ các thông tin được quy định.                                                    |
+| **AC-32** | SR-32        | Thông tin thanh toán hiển thị phải tương ứng với đúng chuyến xe.                                                        |
+| **AC-33** | SR-33        | Nhân viên vận hành phải có thể xem, thêm, sửa hoặc quản lý thông tin khách hàng theo quyền được cấp.                    |
+| **AC-34** | SR-34        | Nhân viên vận hành phải có thể xem và quản lý thông tin tài xế theo quyền được cấp.                                     |
+| **AC-35** | SR-35        | Nhân viên vận hành phải có thể xem danh sách và chi tiết các chuyến xe.                                                 |
+| **AC-36** | SR-36        | Hệ thống phải hiển thị danh sách các chuyến xe đang hoạt động để nhân viên vận hành theo dõi.                           |
+| **AC-37** | SR-37        | Báo cáo phải hiển thị được tổng số chuyến xe trong khoảng thời gian được chọn.                                          |
+| **AC-38** | SR-38        | Báo cáo phải phân biệt được số chuyến hoàn thành và số chuyến bị hủy.                                                   |
+| **AC-39** | SR-39        | Báo cáo doanh thu phải được tính từ các giao dịch thanh toán hợp lệ.                                                    |
+| **AC-40** | SR-40        | Nhân viên vận hành phải có thể xem thông tin các giao dịch thanh toán.                                                  |
+| **AC-41** | SR-41        | Khi Payment Provider hoặc Notification Provider bị lỗi, hệ thống phải ghi nhận sự cố vào log.                           |
+| **AC-42** | SR-42        | Khi dịch vụ bên thứ ba tạm thời không hoạt động, yêu cầu đặt xe đã tạo phải vẫn được lưu trên hệ thống.                 |
+| **AC-43** | SR-43        | Khi dịch vụ thanh toán hoặc thông báo bị gián đoạn, các chức năng đặt xe và quản lý chuyến xe chính vẫn phải hoạt động. |
+| **AC-44** | SR-44        | Sau khi dịch vụ thanh toán được khôi phục, hệ thống phải cho phép thực hiện lại giao dịch FAILED/PENDING theo quy định. |
+
+### 11.2. Nguyên tắc xác nhận
+
+Một **SR được xem là đạt** khi tất cả các **AC liên quan** đến SR đó đều đạt.
+
+* **PASS:** Tất cả tiêu chí AC của SR đều thỏa mãn.
+* **FAIL:** Có ít nhất một tiêu chí AC không thỏa mãn.
+* Mỗi AC phải có kết quả kiểm thử rõ ràng để xác định yêu cầu có đạt hay không.
+
+## 12. Bảng truy vết yêu cầu
+
+Bảng truy vết được sử dụng để kiểm soát mối liên hệ giữa mục tiêu nghiệp vụ, yêu cầu nghiệp vụ, mô hình quy trình nghiệp vụ, yêu cầu hệ thống, Use Case và tiêu chí chấp nhận.
+
+Chuỗi truy vết của hệ thống:
+
+**BG → BR → PBM → SR → UC → AC**
+
+Trong đó:
+
+* **BG (Business Goal):** Mục tiêu nghiệp vụ.
+* **BR (Business Requirement):** Yêu cầu nghiệp vụ.
+* **PBM (Process Business Model):** Mô hình quy trình nghiệp vụ.
+* **SR (System Requirement):** Yêu cầu hệ thống.
+* **UC (Use Case):** Chức năng/ca sử dụng của hệ thống.
+* **AC (Acceptance Criteria):** Tiêu chí chấp nhận dùng để xác định yêu cầu đã đạt hay chưa.
+
+### 12.1. Traceability Matrix
+
+| BG    | BR    | PBM    | SR    | UC    | AC                        |
+| ----- | ----- | ------ | ----- | ----- | ------------------------- |
+| BG-01 | BR-01 | PBM-01 | SR-01 | UC-03 | AC-01.1, AC-01.2          |
+| BG-01 | BR-01 | PBM-01 | SR-02 | UC-03 | AC-02.1, AC-02.2          |
+| BG-01 | BR-01 | PBM-01 | SR-03 | UC-03 | AC-03.1, AC-03.2, AC-03.3 |
+| BG-01 | BR-01 | PBM-01 | SR-04 | UC-03 | AC-04.1, AC-04.2          |
+| BG-02 | BR-02 | PBM-02 | SR-05 | UC-03 | AC-05.1, AC-05.2          |
+| BG-02 | BR-02 | PBM-02 | SR-06 | UC-05 | AC-06.1, AC-06.2          |
+| BG-02 | BR-02 | PBM-02 | SR-07 | UC-06 | AC-07.1, AC-07.2          |
+| BG-03 | BR-03 | PBM-03 | SR-08 | UC-07 | AC-08.1                   |
+| BG-03 | BR-03 | PBM-03 | SR-09 | UC-17 | AC-09.1, AC-09.2          |
+| BG-03 | BR-03 | PBM-03 | SR-10 | UC-07 | AC-10.1, AC-10.2          |
+| BG-03 | BR-03 | PBM-03 | SR-11 | UC-07 | AC-11.1                   |
+| BG-04 | BR-04 | PBM-04 | SR-12 | UC-14 | AC-12.1                   |
+| BG-04 | BR-04 | PBM-04 | SR-13 | UC-15 | AC-13.1                   |
+| BG-04 | BR-04 | PBM-04 | SR-14 | UC-14 | AC-14.1                   |
+| BG-04 | BR-04 | PBM-04 | SR-15 | UC-07 | AC-15.1, AC-15.2          |
+| BG-05 | BR-05 | PBM-05 | SR-16 | UC-10 | AC-16.1, AC-16.2          |
+| BG-05 | BR-05 | PBM-05 | SR-17 | UC-17 | AC-17.1                   |
+| BG-05 | BR-05 | PBM-05 | SR-18 | UC-10 | AC-18.1, AC-18.2          |
+| BG-05 | BR-05 | PBM-05 | SR-19 | UC-10 | AC-19.1                   |
+| BG-06 | BR-06 | PBM-06 | SR-20 | UC-16 | AC-20.1, AC-20.2          |
+| BG-06 | BR-06 | PBM-06 | SR-21 | UC-16 | AC-21.1                   |
+| BG-06 | BR-06 | PBM-06 | SR-22 | UC-13 | AC-22.1, AC-22.2          |
+| BG-07 | BR-07 | PBM-07 | SR-23 | UC-03 | AC-23.1, AC-23.2          |
+| BG-07 | BR-07 | PBM-07 | SR-24 | UC-03 | AC-24.1                   |
+| BG-08 | BR-08 | PBM-08 | SR-25 | UC-11 | AC-25.1                   |
+| BG-08 | BR-08 | PBM-08 | SR-26 | UC-11 | AC-26.1, AC-26.2          |
+| BG-08 | BR-08 | PBM-08 | SR-27 | UC-11 | AC-27.1                   |
+| BG-08 | BR-08 | PBM-08 | SR-28 | UC-11 | AC-28.1, AC-28.2          |
+| BG-08 | BR-08 | PBM-08 | SR-29 | UC-11 | AC-29.1                   |
+| BG-09 | BR-09 | PBM-09 | SR-30 | UC-12 | AC-30.1                   |
+| BG-09 | BR-09 | PBM-09 | SR-31 | UC-12 | AC-31.1, AC-31.2          |
+| BG-09 | BR-09 | PBM-09 | SR-32 | UC-12 | AC-32.1                   |
+| BG-10 | BR-10 | PBM-10 | SR-33 | UC-19 | AC-33.1                   |
+| BG-10 | BR-10 | PBM-10 | SR-34 | UC-20 | AC-34.1                   |
+| BG-10 | BR-10 | PBM-10 | SR-35 | UC-21 | AC-35.1                   |
+| BG-10 | BR-10 | PBM-10 | SR-36 | UC-22 | AC-36.1                   |
+| BG-11 | BR-11 | PBM-11 | SR-37 | UC-24 | AC-37.1                   |
+| BG-11 | BR-11 | PBM-11 | SR-38 | UC-24 | AC-38.1                   |
+| BG-11 | BR-11 | PBM-11 | SR-39 | UC-24 | AC-39.1                   |
+| BG-11 | BR-11 | PBM-11 | SR-40 | UC-23 | AC-40.1                   |
+| BG-12 | BR-12 | PBM-12 | SR-41 | UC-21 | AC-41.1                   |
+| BG-12 | BR-12 | PBM-12 | SR-42 | UC-03 | AC-42.1                   |
+| BG-12 | BR-12 | PBM-12 | SR-43 | UC-03 | AC-43.1                   |
+| BG-12 | BR-12 | PBM-12 | SR-44 | UC-11 | AC-44.1                   |
+
+
 
