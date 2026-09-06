@@ -30,26 +30,16 @@ Công ty ABC hiện kinh doanh dịch vụ đặt xe trực tuyến nhưng gặp
 
 ---
 
-# 2. BÊN LIÊN QUAN & TÁC NHÂN HỆ THỐNG (STAKEHOLDERS & ACTORS)
+# 2. BÊN LIÊN QUAN HỆ THỐNG (STAKEHOLDERS)
 
-## 2.1. Danh sách Stakeholders
+| Stakeholder                             | Vai trò                                                                                                       |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Khách hàng (Customer)**               | Người sử dụng dịch vụ, tạo yêu cầu đặt xe, theo dõi chuyến đi, thực hiện thanh toán và xem lịch sử chuyến đi. |
+| **Tài xế (Driver)**                     | Cung cấp dịch vụ vận chuyển, nhận hoặc từ chối chuyến, cập nhật trạng thái chuyến và cung cấp vị trí GPS.     |
+| **Nhân viên vận hành (Admin/Operator)** | Quản lý khách hàng, tài xế, chuyến đi, hỗ trợ xử lý sự cố và theo dõi hoạt động của hệ thống.                 |
+| **Ban Giám Đốc**                        | Sponsor dự án, định hướng phát triển hệ thống, theo dõi tiến độ triển khai và hiệu quả hoạt động kinh doanh.  |
+| **Bộ phận Kế toán**                     | Theo dõi doanh thu, quản lý và đối soát các giao dịch thanh toán.                                             |
 
-| Stakeholder                      | Vai trò                                                                  |
-| -------------------------------- | ------------------------------------------------------------------------ |
-| Ban Giám Đốc                     | Sponsor dự án, theo dõi tiến độ 7 tuần, xem báo cáo hiệu quả kinh doanh. |
-| Bộ phận Vận hành                 | Quản lý tài xế, khách hàng, giám sát chuyến đi và xử lý sự cố.           |
-| Bộ phận Kế toán                  | Quản lý doanh thu, đối soát thanh toán.                                  |
-| Đội ngũ Phát triển (BA, Dev, QA) | Phân tích và xây dựng hệ thống.                                          |
-| Nhà cung cấp Thanh toán (PSP)    | Tích hợp cổng thanh toán điện tử bên thứ ba.                             |
-| Nhà cung cấp Thông báo           | Đối tác hạ tầng SMS / Push Notification.                                 |
-
-## 2.2. Các Tác nhân Hệ thống (Actors)
-
-| Actor                               | Chức năng                                                         |
-| ----------------------------------- | ----------------------------------------------------------------- |
-| Khách hàng (Customer)               | Đặt xe, theo dõi chuyến đi, thanh toán, đánh giá tài xế.          |
-| Tài xế (Driver)                     | Định vị GPS, nhận/từ chối cuốc xe, cập nhật trạng thái chuyến đi. |
-| Nhân viên vận hành (Admin/Operator) | Quản lý hệ thống, phân quyền, hỗ trợ chuyến đi lỗi, xem báo cáo.  |
 
 ---
 
@@ -80,6 +70,35 @@ Quy trình đặt xe và thực hiện chuyến đi của CAB System:
 | Khách / Tài xế hủy    | Chuyển sang HUY_CHUYEN.                 |
 
 ---
+
+```mermaid
+flowchart TD
+    A([Bắt đầu]) --> B[Khách hàng nhập điểm đón và điểm đến]
+    B --> C{Thông tin hợp lệ?}
+
+    C -- Không --> B
+    C -- Có --> D[Tạo yêu cầu chuyến đi]
+    D --> E[Trạng thái: TIM_TAI_XE]
+
+    E --> F[Hệ thống tìm tài xế phù hợp]
+    F --> G[Gửi đề xuất chuyến đến tài xế]
+
+    G --> H{Tài xế xử lý}
+
+    H -- Accept --> I[Chuyến được xác nhận]
+    H -- Reject --> F
+    H -- Timeout --> F
+
+    I --> J[Trạng thái: DA_NHAN_CHUYEN]
+    J --> K[Tài xế đến điểm đón]
+    K --> L[Trạng thái: DA_DEN_DIEM_DON]
+    L --> M[Tài xế đón khách]
+    M --> N[Trạng thái: DA_DON_KHACH]
+    N --> O[Thực hiện chuyến]
+    O --> P[Trạng thái: DANG_DI_CHUYEN]
+    P --> Q[Hoàn thành chuyến]
+    Q --> R[Trạng thái: HOAN_THANH]
+```
 
 # 4. PHẠM VI MODULE HỆ THỐNG (SYSTEM MODULES)
 
@@ -325,15 +344,7 @@ Hệ thống phải cho phép tài xế cập nhật trạng thái chuyến tron
 **Điều kiện hủy:**
 Chuyến có thể chuyển sang HUY_CHUYEN khi khách hàng hoặc tài xế thực hiện hủy chuyến theo quy định.
 
-## BG-07 - Tính cước chuyến
 
-**Mô tả:**
-Hệ thống phải tự động tính cước chuyến sau khi chuyến hoàn thành.
-
-| Kết quả                                          |
-| ------------------------------------------------ |
-| Xác định số tiền khách hàng cần thanh toán       |
-| Tạo thông tin thanh toán tương ứng với chuyến đi |
 
 ## BG-08 - Thanh toán chuyến đi
 
@@ -364,42 +375,205 @@ Hệ thống phải cho phép khách hàng xem lại lịch sử các chuyến �
 |   7 | Số tiền thanh toán    |
 |   8 | Trạng thái thanh toán |
 
-## BG-10 - Quản lý và giám sát vận hành
+# 6. MÔ HÌNH HÓA NGHIỆP VỤ (BUSINESS PROCESS MODELING)
 
-**Mô tả:**
-Hệ thống phải cho phép Admin/Operator quản lý thông tin khách hàng, tài xế và giám sát các chuyến đi.
+## 6.1. Tổng quan các quy trình nghiệp vụ
 
-| STT | Chức năng                     |
-| --: | ----------------------------- |
-|   1 | Xem danh sách khách hàng      |
-|   2 | Xem danh sách tài xế          |
-|   3 | Xem trạng thái tài xế         |
-|   4 | Xem danh sách chuyến          |
-|   5 | Xem chi tiết chuyến           |
-|   6 | Hỗ trợ xử lý chuyến gặp sự cố |
+Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB có thể được mô hình hóa thành các quy trình nghiệp vụ chính sau:
 
-## BG-11 - Báo cáo vận hành
+| STT | Quy trình nghiệp vụ             | Business Requirement liên quan |
+| --: | ------------------------------- | ------------------------------ |
+|   1 | Tạo yêu cầu chuyến đi           | BG-01                          |
+|   2 | Lựa chọn và xác nhận tài xế     | BG-02                          |
+|   3 | Tự động ghép tài xế             | BG-03                          |
+|   4 | Tài xế nhận hoặc từ chối chuyến | BG-04                          |
+|   5 | Theo dõi chuyến đi              | BG-05                          |
+|   6 | Cập nhật trạng thái chuyến      | BG-06                          |
+|   7 | Thanh toán chuyến đi            | BG-08                          |
+|   8 | Xem lịch sử chuyến đi           | BG-09                          |
 
-**Mô tả:**
-Hệ thống phải cho phép Admin/Operator xem các báo cáo cơ bản phục vụ hoạt động kinh doanh.
+> **Lưu ý:** Nội dung BG-07 không được cung cấp trong phần Business Requirements trên, nên không đưa vào mô hình chi tiết để tránh tự bổ sung thông tin ngoài tài liệu.
 
-| STT | Báo cáo              |
-| --: | -------------------- |
-|   1 | Tổng số chuyến       |
-|   2 | Số chuyến hoàn thành |
-|   3 | Số chuyến hủy        |
-|   4 | Tổng doanh thu       |
-|   5 | Số khách hàng        |
-|   6 | Số tài xế            |
+---
 
-## BG-12 - Đảm bảo hoạt động liên tục
+## 6.2. Quy trình tạo yêu cầu chuyến đi
 
-**Mô tả:**
-Hệ thống phải đảm bảo luồng đặt xe không bị gián đoạn hoàn toàn khi các dịch vụ phụ trợ như thanh toán hoặc thông báo gặp lỗi tạm thời.
+**Mục đích:** Cho phép khách hàng tạo một yêu cầu chuyến đi bằng cách cung cấp điểm đón và điểm đến.
 
-| STT | Yêu cầu                                                                 |
-| --: | ----------------------------------------------------------------------- |
-|   1 | Ghi nhận trạng thái lỗi của dịch vụ                                     |
-|   2 | Không làm mất thông tin chuyến đi                                       |
-|   3 | Cho phép xử lý lại giao dịch khi cần                                    |
-|   4 | Các module chính tiếp tục hoạt động độc lập khi có lỗi ở module phụ trợ |
+| Thành phần           | Nội dung                                               |
+| -------------------- | ------------------------------------------------------ |
+| Actor chính          | Khách hàng                                             |
+| Điều kiện trước      | Khách hàng đã đăng nhập                                |
+| Dữ liệu đầu vào      | Điểm đón, điểm đến                                     |
+| Xử lý                | Hệ thống kiểm tra tính hợp lệ của điểm đón và điểm đến |
+| Kết quả              | Tạo yêu cầu chuyến đi                                  |
+| Trạng thái tiếp theo | TIM_TAI_XE                                             |
+
+**Luồng nghiệp vụ:**
+
+| Bước | Hoạt động                                      |
+| ---: | ---------------------------------------------- |
+|    1 | Khách hàng đăng nhập hệ thống                  |
+|    2 | Khách hàng nhập điểm đón                       |
+|    3 | Khách hàng nhập điểm đến                       |
+|    4 | Hệ thống kiểm tra tính hợp lệ của thông tin    |
+|    5 | Hệ thống tạo yêu cầu chuyến đi                 |
+|    6 | Yêu cầu được chuyển sang trạng thái TIM_TAI_XE |
+
+---
+
+## 6.3. Quy trình tự động ghép và xác nhận tài xế
+
+**Mục đích:** Tìm kiếm tài xế phù hợp và thực hiện xác nhận chuyến đi.
+
+### 6.3.1. Tiêu chí tìm kiếm tài xế
+
+| STT | Tiêu chí                            |
+| --: | ----------------------------------- |
+|   1 | Tài xế đang Online                  |
+|   2 | Tài xế đang Available               |
+|   3 | Tài xế có vị trí GPS hợp lệ         |
+|   4 | Tài xế phù hợp với khu vực điểm đón |
+
+### 6.3.2. Luồng nghiệp vụ
+
+| Bước | Hoạt động                                                                 |
+| ---: | ------------------------------------------------------------------------- |
+|    1 | Hệ thống nhận yêu cầu chuyến ở trạng thái TIM_TAI_XE                      |
+|    2 | Hệ thống tìm kiếm tài xế phù hợp theo các tiêu chí                        |
+|    3 | Hệ thống gửi đề xuất chuyến đến tài xế                                    |
+|    4 | Tài xế lựa chọn Accept hoặc Reject                                        |
+|    5 | Nếu Accept, chuyến được xác nhận                                          |
+|    6 | Nếu Reject, hệ thống tìm tài xế khác                                      |
+|    7 | Nếu Timeout, hệ thống xem tài xế như không nhận chuyến và thực hiện Retry |
+|    8 | Khi tài xế được xác nhận, chuyến chuyển sang trạng thái DA_NHAN_CHUYEN    |
+
+---
+
+## 6.4. Quy trình theo dõi và thực hiện chuyến đi
+
+**Mục đích:** Cho phép khách hàng theo dõi thông tin chuyến đi và vị trí tài xế theo thời gian thực.
+
+### 6.4.1. Thông tin được hiển thị
+
+| STT | Thông tin                  |
+| --: | -------------------------- |
+|   1 | Vị trí hiện tại của tài xế |
+|   2 | Trạng thái chuyến          |
+|   3 | Thông tin tài xế           |
+|   4 | Điểm đón                   |
+|   5 | Điểm đến                   |
+
+### 6.4.2. Luồng cập nhật trạng thái
+
+| STT | Trạng thái      |
+| --: | --------------- |
+|   1 | DA_NHAN_CHUYEN  |
+|   2 | DA_DEN_DIEM_DON |
+|   3 | DA_DON_KHACH    |
+|   4 | DANG_DI_CHUYEN  |
+|   5 | HOAN_THANH      |
+|   6 | HUY_CHUYEN      |
+
+**Luồng nghiệp vụ:**
+
+| Bước | Hoạt động                                                                                                    |
+| ---: | ------------------------------------------------------------------------------------------------------------ |
+|    1 | Tài xế nhận chuyến                                                                                           |
+|    2 | Tài xế di chuyển đến điểm đón                                                                                |
+|    3 | Tài xế cập nhật trạng thái DA_DEN_DIEM_DON                                                                   |
+|    4 | Tài xế đón khách và cập nhật DA_DON_KHACH                                                                    |
+|    5 | Tài xế thực hiện chuyến và cập nhật DANG_DI_CHUYEN                                                           |
+|    6 | Khi đến điểm đến, tài xế cập nhật HOAN_THANH                                                                 |
+|    7 | Trong quá trình thực hiện, chuyến có thể chuyển sang HUY_CHUYEN khi khách hàng hoặc tài xế hủy theo quy định |
+|    8 | Khách hàng theo dõi trạng thái và vị trí tài xế trên hệ thống                                                |
+
+---
+
+## 6.5. Quy trình thanh toán chuyến đi
+
+**Mục đích:** Cho phép khách hàng thanh toán và hệ thống quản lý trạng thái giao dịch.
+
+| Thành phần         | Nội dung                                            |
+| ------------------ | --------------------------------------------------- |
+| Actor chính        | Khách hàng                                          |
+| Đầu vào            | Yêu cầu thanh toán chuyến đi                        |
+| Xử lý              | Hệ thống thực hiện và cập nhật trạng thái giao dịch |
+| Kết quả            | Lưu trạng thái giao dịch                            |
+| Thông tin nhạy cảm | Hệ thống không lưu thông tin thẻ nhạy cảm           |
+
+### Trạng thái giao dịch
+
+| Trạng thái | Ý nghĩa                  |
+| ---------- | ------------------------ |
+| PENDING    | Giao dịch đang chờ xử lý |
+| SUCCESS    | Thanh toán thành công    |
+| FAILED     | Thanh toán thất bại      |
+
+### Luồng nghiệp vụ
+
+| Bước | Hoạt động                                                 |
+| ---: | --------------------------------------------------------- |
+|    1 | Khách hàng thực hiện thanh toán                           |
+|    2 | Hệ thống tạo/xử lý giao dịch                              |
+|    3 | Giao dịch ở trạng thái PENDING                            |
+|    4 | Nếu thanh toán thành công, trạng thái chuyển sang SUCCESS |
+|    5 | Nếu thanh toán thất bại, trạng thái chuyển sang FAILED    |
+|    6 | Hệ thống lưu thông tin cần thiết để quản lý giao dịch     |
+
+---
+
+## 6.6. Quy trình xem lịch sử chuyến đi
+
+**Mục đích:** Cho phép khách hàng xem lại các chuyến đi đã thực hiện và thông tin thanh toán liên quan.
+
+### Thông tin lịch sử
+
+| STT | Thông tin             |
+| --: | --------------------- |
+|   1 | Mã chuyến             |
+|   2 | Thời gian             |
+|   3 | Điểm đón              |
+|   4 | Điểm đến              |
+|   5 | Tài xế                |
+|   6 | Trạng thái chuyến     |
+|   7 | Số tiền thanh toán    |
+|   8 | Trạng thái thanh toán |
+
+### Luồng nghiệp vụ
+
+| Bước | Hoạt động                                                |
+| ---: | -------------------------------------------------------- |
+|    1 | Khách hàng truy cập chức năng lịch sử chuyến đi          |
+|    2 | Hệ thống lấy danh sách các chuyến đã thực hiện           |
+|    3 | Hệ thống hiển thị thông tin từng chuyến                  |
+|    4 | Khách hàng xem thông tin chuyến và trạng thái thanh toán |
+
+---
+
+## 6.7. Tổng hợp luồng nghiệp vụ chính
+
+| Bước | Quy trình                       | Trạng thái / Kết quả             |
+| ---: | ------------------------------- | -------------------------------- |
+|    1 | Khách hàng tạo yêu cầu chuyến   | TIM_TAI_XE                       |
+|    2 | Hệ thống tìm tài xế phù hợp     | Tài xế được đề xuất              |
+|    3 | Tài xế nhận chuyến              | DA_NHAN_CHUYEN                   |
+|    4 | Tài xế đến điểm đón             | DA_DEN_DIEM_DON                  |
+|    5 | Tài xế đón khách                | DA_DON_KHACH                     |
+|    6 | Tài xế thực hiện chuyến         | DANG_DI_CHUYEN                   |
+|    7 | Chuyến hoàn thành               | HOAN_THANH                       |
+|    8 | Khách hàng thực hiện thanh toán | PENDING / SUCCESS / FAILED       |
+|    9 | Hệ thống lưu thông tin chuyến   | Hiển thị trong lịch sử chuyến đi |
+
+### Luồng xử lý khi tài xế không nhận chuyến
+
+| Tình huống                 | Xử lý                                       |
+| -------------------------- | ------------------------------------------- |
+| Tài xế Accept              | Chuyến được xác nhận                        |
+| Tài xế Reject              | Hệ thống tìm tài xế khác                    |
+| Tài xế Timeout             | Hệ thống thực hiện Retry và tìm tài xế khác |
+| Không có tài xế phù hợp    | Tiếp tục tìm kiếm theo cơ chế của hệ thống  |
+| Khách hàng hoặc tài xế hủy | Chuyến chuyển sang HUY_CHUYEN               |
+
+
+
