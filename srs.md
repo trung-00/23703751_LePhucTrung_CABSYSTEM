@@ -43,31 +43,25 @@ Công ty ABC hiện kinh doanh dịch vụ đặt xe trực tuyến nhưng gặp
 
 ---
 
-# 3. QUY TRÌNH NGHIỆP VỤ CỐT LÕI (CORE BUSINESS PROCESS)
+# 3. CHUYỂN ĐỔI YÊU CẦU KHÁCH HÀNG THÀNH MỤC TIÊU NGHIỆP VỤ
 
-Quy trình đặt xe và thực hiện chuyến đi của CAB System:
+Dựa trên các yêu cầu của khách hàng, hệ thống CAB được chuyển đổi thành các mục tiêu nghiệp vụ (Business Goals). Mỗi mục tiêu được định danh bằng mã **BG** nhằm thuận tiện cho việc quản lý, theo dõi và liên kết với các chức năng của hệ thống.
 
-| Bước | Trạng thái          | Mô tả                    |
-| ---: | ------------------- | ------------------------ |
-|    1 | KHOI_TAO            | Khách hàng đặt xe.       |
-|    2 | TIM_TAI_XE          | Hệ thống tìm tài xế.     |
-|    3 | CHO_TAI_XE_XAC_NHAN | Gửi đề xuất đến tài xế.  |
-|    4 | DA_NHAN_CHUYEN      | Tài xế nhận chuyến.      |
-|    5 | DA_DEN_DIEM_DON     | Tài xế đến điểm đón.     |
-|    6 | DA_DON_KHACH        | Khách lên xe.            |
-|    7 | DANG_DI_CHUYEN      | Bắt đầu di chuyển.       |
-|    8 | HOAN_THANH          | Đến điểm đến.            |
-|    9 | THANH_TOAN          | Tính cước và thanh toán. |
-|   10 | HOÀN TẤT            | Hoàn tất và đánh giá.    |
+| Mã BG     | Mục tiêu nghiệp vụ                                                                                                                      |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **BG-01** | Cho phép khách hàng tạo yêu cầu chuyến đi bằng cách nhập điểm đón và điểm đến hợp lệ.                                                   |
+| **BG-02** | Cho phép khách hàng lựa chọn và xác nhận tài xế được hệ thống đề xuất cho chuyến đi.                                                    |
+| **BG-03** | Tự động tìm kiếm và đề xuất tài xế phù hợp dựa trên trạng thái hoạt động, vị trí GPS và khu vực điểm đón.                               |
+| **BG-04** | Cho phép tài xế nhận hoặc từ chối chuyến trong thời gian quy định và tự động tìm tài xế khác khi từ chối hoặc hết thời gian chờ.        |
+| **BG-05** | Cho phép khách hàng theo dõi trạng thái chuyến đi và vị trí tài xế theo thời gian thực.                                                 |
+| **BG-06** | Cho phép tài xế cập nhật trạng thái chuyến đi trong suốt quá trình thực hiện chuyến.                                                    |
+| **BG-07** | Tự động xác định số tiền khách hàng cần thanh toán và tạo thông tin thanh toán cho chuyến đi.                                           |
+| **BG-08** | Cho phép khách hàng thực hiện thanh toán và quản lý trạng thái giao dịch.                                                               |
+| **BG-09** | Cho phép khách hàng xem lại lịch sử chuyến đi và thông tin thanh toán liên quan.                                                        |
+| **BG-10** | Hỗ trợ nhân viên vận hành quản lý khách hàng, tài xế, chuyến đi và xử lý các sự cố trong quá trình vận hành.                            |
+| **BG-11** | Cung cấp các báo cáo cơ bản về chuyến đi, doanh thu, khách hàng và tài xế để hỗ trợ quản lý.                                            |
+| **BG-12** | Đảm bảo hoạt động đặt xe và các chức năng chính của hệ thống vẫn được duy trì khi dịch vụ thanh toán hoặc thông báo gặp sự cố tạm thời. |
 
-**Các trường hợp đặc biệt:**
-
-| Trường hợp            | Xử lý                                   |
-| --------------------- | --------------------------------------- |
-| Tài xế từ chối        | Quay lại TIM_TAI_XE để tìm tài xế khác. |
-| Tài xế Timeout        | Quay lại TIM_TAI_XE và thực hiện Retry. |
-| Không tìm thấy tài xế | Chuyển sang HUY_CHUYEN.                 |
-| Khách / Tài xế hủy    | Chuyển sang HUY_CHUYEN.                 |
 
 ---
 
