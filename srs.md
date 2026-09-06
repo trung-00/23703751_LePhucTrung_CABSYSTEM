@@ -1,67 +1,44 @@
 4. Phạm vi Module Hệ thống (System Modules)
 
-Để đảm bảo hoàn thành MVP trong 7 tuần, CAB System được giới hạn trong 5 module chính. Mỗi module được liên kết trực tiếp với các Business Goal tương ứng.
+Để đảm bảo dự án hoàn thành trong 7 tuần, CAB System được giới hạn trong 5 module chính. Các module tập trung vào quy trình đặt xe cốt lõi và các chức năng cần thiết cho vận hành.
 
-STT	Module	Business Goal chính
-1	Quản lý Khách hàng	BG-02, BG-04
-2	Quản lý Tài xế	BG-01, BG-04, BG-05
-3	Đặt xe & Ghép tài xế	BG-01, BG-02, BG-05
-4	Theo dõi Chuyến & Thanh toán	BG-02, BG-03, BG-05
-5	Quản trị & Vận hành	BG-03, BG-04, BG-05
-
-BG-06 và BG-07 là mục tiêu ở cấp độ toàn hệ thống, không tạo thành module riêng.
-
-4.1. Module 1 - Quản lý Khách hàng (Customer Management)
+4.1. Quản lý Khách hàng (Customer Management)
 
 Mục đích:
-Quản lý tài khoản và thông tin cơ bản của khách hàng, phục vụ quá trình đặt và sử dụng dịch vụ.
+Quản lý tài khoản và thông tin cơ bản của khách hàng.
 
 Business Goal: BG-02, BG-04
 
-Chức năng MVP:
+Chức năng:
 
-Đăng ký / đăng nhập / đăng xuất.
+Đăng ký, đăng nhập, đăng xuất.
 Xem và cập nhật thông tin cá nhân.
 Quản lý trạng thái tài khoản.
 Xem lịch sử chuyến đi.
-
-Ngoài phạm vi MVP:
-
-Loyalty / tích điểm.
-Voucher nâng cao.
-Marketing Automation.
-Phân tích hành vi bằng AI.
-4.2. Module 2 - Quản lý Tài xế (Driver Management)
+4.2. Quản lý Tài xế (Driver Management)
 
 Mục đích:
-Quản lý thông tin và trạng thái hoạt động của tài xế, làm cơ sở cho việc ghép chuyến.
+Quản lý thông tin, trạng thái hoạt động và khả năng nhận chuyến của tài xế.
 
 Business Goal: BG-01, BG-04, BG-05
 
-Chức năng MVP:
+Chức năng:
 
 Đăng nhập tài khoản tài xế.
-Xem / cập nhật thông tin.
-Online / Offline.
-Available / Busy.
+Xem và cập nhật thông tin.
+Chuyển trạng thái Online / Offline.
+Chuyển trạng thái Available / Busy.
 Cập nhật vị trí GPS.
 Nhận, chấp nhận hoặc từ chối chuyến.
 Xem lịch sử chuyến.
-
-Ngoài phạm vi MVP:
-
-Quản lý hồ sơ pháp lý nâng cao.
-Bảo hiểm.
-Tính lương, thưởng/phạt.
-Quản lý đội xe chuyên sâu.
-4.3. Module 3 - Đặt xe & Ghép tài xế (Booking & Matching)
+4.3. Đặt xe & Ghép tài xế (Booking & Matching)
 
 Mục đích:
-Là module cốt lõi, chịu trách nhiệm tiếp nhận yêu cầu đặt xe và tự động tìm tài xế phù hợp.
+Là module cốt lõi của hệ thống, chịu trách nhiệm tạo yêu cầu đặt xe và tự động tìm tài xế phù hợp.
 
 Business Goal: BG-01, BG-02, BG-05
 
-Chức năng MVP:
+Chức năng:
 
 Nhập điểm đón và điểm đến.
 Tạo yêu cầu đặt xe.
@@ -69,161 +46,103 @@ Tính giá dự kiến.
 Tìm tài xế phù hợp.
 Gửi đề xuất chuyến.
 Xử lý Accept / Reject / Timeout.
-Retry tìm tài xế.
+Retry khi tài xế từ chối hoặc Timeout.
 Xác nhận tài xế.
 Hủy chuyến.
 Quản lý trạng thái chuyến.
 
-Luồng trạng thái chính:
+Luồng chính:
 
-KHOI_TAO
+Đặt xe
    ↓
-TIM_TAI_XE
+Tìm tài xế
    ↓
-CHO_TAI_XE_XAC_NHAN
+Gửi đề xuất
    ↓
-DA_NHAN_CHUYEN
+Tài xế xác nhận
    ↓
-DA_DEN_DIEM_DON
+Thực hiện chuyến
    ↓
-DA_DON_KHACH
-   ↓
-DANG_DI_CHUYEN
-   ↓
-HOAN_THANH
+Hoàn thành
 
-
-Luồng hủy:
-
-CHO_TAI_XE_XAC_NHAN ──→ HUY_CHUYEN
-DA_NHAN_CHUYEN ────────→ HUY_CHUYEN
-
-
-Ngoài phạm vi MVP:
-
-Dynamic Pricing phức tạp.
-Carpooling.
-Đặt nhiều chuyến đồng thời.
-Đặt xe theo lịch.
-Tối ưu tuyến đường bằng AI.
-4.4. Module 4 - Theo dõi Chuyến & Thanh toán (Ride Tracking & Payment)
+4.4. Theo dõi Chuyến & Thanh toán (Ride Tracking & Payment)
 
 Mục đích:
-Theo dõi quá trình thực hiện chuyến và xử lý thanh toán sau khi chuyến hoàn thành.
+Theo dõi quá trình thực hiện chuyến và xử lý thanh toán khi chuyến hoàn thành.
 
 Business Goal: BG-02, BG-03, BG-05
 
-Theo dõi chuyến
-Cập nhật vị trí GPS.
-Hiển thị vị trí tài xế.
+Chức năng:
+
+Cập nhật vị trí GPS tài xế.
+Hiển thị vị trí tài xế cho khách hàng.
 Cập nhật trạng thái chuyến.
 Xác nhận đến điểm đón.
 Xác nhận đón khách.
 Bắt đầu chuyến.
 Hoàn thành chuyến.
-Thanh toán
 Tính cước.
-Chọn phương thức thanh toán.
-Tạo giao dịch.
-Gửi giao dịch đến Payment Provider.
-Nhận kết quả thanh toán.
-Lưu trạng thái giao dịch.
+Tạo và xử lý giao dịch thanh toán.
+Lưu trạng thái thanh toán.
 Xử lý thanh toán thất bại.
-
-Ngoài phạm vi MVP:
-
-Ví điện tử nội bộ.
-Trả góp.
-Loyalty Payment.
-Đối soát tài chính nâng cao.
-Dynamic Pricing phức tạp.
-4.5. Module 5 - Quản trị & Vận hành (Admin & Operation)
+4.5. Quản trị & Vận hành (Admin & Operation)
 
 Mục đích:
-Cung cấp công cụ cho Admin/Operator quản lý dữ liệu và giám sát hoạt động của hệ thống.
+Hỗ trợ nhân viên vận hành quản lý dữ liệu và giám sát hoạt động của hệ thống.
 
 Business Goal: BG-03, BG-04, BG-05
 
-Chức năng MVP:
+Chức năng:
 
-Đăng nhập Admin/Operator.
+Đăng nhập Admin / Operator.
 Quản lý khách hàng.
 Quản lý tài xế.
-Xem trạng thái tài xế.
+Theo dõi trạng thái tài xế.
 Giám sát chuyến đi.
 Xem chi tiết chuyến.
 Hỗ trợ xử lý chuyến lỗi.
 Xem giao dịch thanh toán.
 Xem báo cáo cơ bản.
-
-Báo cáo MVP:
-
-Tổng số chuyến.
-Chuyến hoàn thành / hủy.
-Tổng doanh thu.
-Số khách hàng.
-Số tài xế.
-Tỷ lệ nhận chuyến.
-
-Ngoài phạm vi MVP:
-
-BI Dashboard nâng cao.
-Phân tích dữ liệu bằng AI/ML.
-Dự báo doanh thu.
-Workforce Management nâng cao.
-5. Ma trận Module - Business Goal
-Module	BG-01	BG-02	BG-03	BG-04	BG-05
-Quản lý Khách hàng		✓		✓	
-Quản lý Tài xế	✓			✓	✓
-Đặt xe & Ghép tài xế	✓	✓			✓
-Theo dõi Chuyến & Thanh toán		✓	✓		✓
-Quản trị & Vận hành			✓	✓	✓
+5. Liên kết Module với Business Goal
+Module	Business Goal
+Quản lý Khách hàng	BG-02, BG-04
+Quản lý Tài xế	BG-01, BG-04, BG-05
+Đặt xe & Ghép tài xế	BG-01, BG-02, BG-05
+Theo dõi Chuyến & Thanh toán	BG-02, BG-03, BG-05
+Quản trị & Vận hành	BG-03, BG-04, BG-05
+Ghi chú
+BG-01: Tự động hóa ghép chuyến → tập trung ở Booking & Matching.
+BG-02: Nâng cao trải nghiệm khách hàng → Customer, Booking và Tracking.
+BG-03: Quản lý thanh toán → Payment và Admin/Operation.
+BG-04: Tối ưu vận hành → Customer, Driver và Admin/Operation.
+BG-05: Khả năng chịu tải và ổn định → áp dụng cho toàn hệ thống.
+BG-06: Hoàn thành MVP trong 7 tuần → là mục tiêu của toàn dự án.
+BG-07: Khả năng mở rộng kiến trúc → là mục tiêu của kiến trúc toàn hệ thống.
 6. Giới hạn MVP
 
-Trong phạm vi 7 tuần, hệ thống chỉ tập trung vào luồng nghiệp vụ cốt lõi:
+Trong thời gian 7 tuần, hệ thống chỉ tập trung vào luồng nghiệp vụ chính:
 
 Customer
    │
-   │ Đặt xe
    ▼
-Booking
+Đặt xe
    │
    ▼
-Matching Engine
+Booking & Matching
    │
-   │ Ghép tài xế
    ▼
 Driver
    │
-   │ Nhận & thực hiện chuyến
    ▼
 Ride Tracking
    │
-   │ Hoàn thành
    ▼
 Payment
    │
    ▼
-Hoàn tất
+Hoàn tất chuyến
 
 
-Admin/Operator giám sát và hỗ trợ toàn bộ quy trình:
+Admin / Operator có nhiệm vụ quản lý và giám sát các thành phần trên.
 
-Admin / Operator
-       │
-       ├── Quản lý khách hàng
-       ├── Quản lý tài xế
-       ├── Giám sát chuyến đi
-       └── Xem thanh toán & báo cáo
-
-Phân loại Business Goal
-Business Goal	Phạm vi
-BG-01	Booking & Matching
-BG-02	Customer + Booking + Tracking
-BG-03	Payment + Admin/Operation
-BG-04	Customer + Driver + Admin/Operation
-BG-05	Toàn hệ thống
-BG-06	Toàn dự án - hoàn thành MVP trong 7 tuần
-BG-07	Kiến trúc toàn hệ thống - khả năng mở rộng
-
-Nguyên tắc giới hạn: Không tạo module riêng cho BG-05, BG-06 và BG-07. Đây là các mục tiêu xuyên suốt toàn hệ thống.
+Các chức năng nâng cao như Loyalty, Voucher, Carpooling, Dynamic Pricing, AI/ML, BI nâng cao và quản lý tài chính chuyên sâu không thuộc phạm vi MVP.
