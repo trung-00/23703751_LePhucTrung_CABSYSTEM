@@ -82,4 +82,155 @@ BG-05	Hệ thống cần phục vụ số lượng lớn khách hàng/tài xế 
 BG-06	Thời gian xây dựng và triển khai sản phẩm trong vòng 7 tuần.	Tối ưu hóa thời gian đưa sản phẩm ra thị trường (Time-to-Market) với chiến lược phát triển MVP đúng hạn.	• Triển khai thành công phiên bản MVP hoạt động ổn định trong đúng 7 tuần.
 BG-07	Kiến trúc đủ linh hoạt để tương lai bổ sung dịch vụ, thanh toán, thông báo mới.	Đảm bảo tính linh hoạt & Khả năng mở rộng kiến trúc (Scalability & Extensibility) cho định hướng phát triển dài hạn.	• Chi phí và thời gian tích hợp thêm 1 kênh thanh toán/thông báo mới < 1 tuần phát triển.
 | **BG-06** | *Thời gian xây dựng và triển khai sản phẩm trong vòng 7 tuần.* | **Tối ưu hóa thời gian đưa sản phẩm ra thị trường (Time-to-Market)** với chiến lược phát triển MVP đúng hạn. | • Triển khai thành công phiên bản MVP hoạt động ổn định trong đúng **7 tuần**. |
+
+
+4. Phạm vi Module Hệ thống (System Modules)
+
+Để đảm bảo dự án CAB System có thể hoàn thành trong thời gian 7 tuần, hệ thống được giới hạn trong 5 module chính. Mỗi module được xây dựng để đáp ứng trực tiếp một hoặc nhiều Business Goal đã xác định.
+
+4.1. Module 1 - Quản lý Khách hàng (Customer Management)
+Mục đích
+
+Quản lý tài khoản và thông tin cơ bản của khách hàng, phục vụ quá trình đặt xe và sử dụng dịch vụ.
+
+Business Goal liên quan
+BG-02: Nâng cao trải nghiệm khách hàng.
+BG-04: Tối ưu hóa năng lực quản trị vận hành.
+Chức năng trong phạm vi MVP
+Đăng ký tài khoản.
+Đăng nhập/đăng xuất.
+Xem thông tin cá nhân.
+Cập nhật thông tin cá nhân.
+Quản lý trạng thái tài khoản.
+Xem lịch sử chuyến đi.
+Không nằm trong MVP
+Chương trình khách hàng thân thiết.
+Tích điểm.
+Voucher nâng cao.
+Marketing Automation.
+Phân tích hành vi khách hàng bằng AI.
+4.2. Module 2 - Quản lý Tài xế (Driver Management)
+Mục đích
+
+Quản lý thông tin tài xế và trạng thái hoạt động, làm cơ sở cho việc tự động ghép tài xế với khách hàng.
+
+Business Goal liên quan
+BG-01: Tự động hóa quy trình ghép chuyến.
+BG-04: Tối ưu hóa năng lực quản trị vận hành.
+BG-05: Đảm bảo hệ thống hoạt động ổn định và có khả năng mở rộng.
+Chức năng trong phạm vi MVP
+Đăng nhập tài khoản tài xế.
+Xem/cập nhật thông tin tài xế.
+Cập nhật trạng thái Online/Offline.
+Cập nhật trạng thái Available/Busy.
+Cập nhật vị trí GPS.
+Nhận đề xuất chuyến.
+Chấp nhận chuyến.
+Từ chối chuyến.
+Xem lịch sử chuyến.
+Không nằm trong MVP
+Quản lý hồ sơ pháp lý nâng cao.
+Quản lý bảo hiểm.
+Tính lương tài xế.
+Quản lý thưởng/phạt nâng cao.
+Quản lý đội xe chuyên sâu.
+4.3. Module 3 - Đặt xe & Ghép tài xế (Booking & Matching)
+Mục đích
+
+Đây là module nghiệp vụ cốt lõi của CAB System, chịu trách nhiệm tiếp nhận yêu cầu đặt xe và tự động tìm tài xế phù hợp.
+
+Business Goal liên quan
+BG-01: Tự động hóa quy trình ghép chuyến.
+BG-02: Nâng cao trải nghiệm khách hàng.
+BG-05: Đảm bảo khả năng chịu tải và hoạt động ổn định.
+Chức năng trong phạm vi MVP
+Nhập điểm đón.
+Nhập điểm đến.
+Tạo yêu cầu đặt xe.
+Tính giá dự kiến.
+Tìm tài xế phù hợp.
+Gửi đề xuất chuyến cho tài xế.
+Xử lý tài xế chấp nhận/từ chối.
+Xử lý Timeout.
+Retry tìm tài xế.
+Xác nhận tài xế.
+Hủy chuyến.
+Quản lý trạng thái chuyến.
+Trạng thái chuyến
+KHOI_TAO
+    ↓
+TIM_TAI_XE
+    ↓
+CHO_TAI_XE_XAC_NHAN
+    ↓
+DA_NHAN_CHUYEN
+    ↓
+DA_DEN_DIEM_DON
+    ↓
+DA_DON_KHACH
+    ↓
+DANG_DI_CHUYEN
+    ↓
+HOAN_THANH
+
+
+Nhánh hủy:
+
+CHO_TAI_XE_XAC_NHAN
+        ↓
+    HUY_CHUYEN
+
+
+hoặc:
+
+DA_NHAN_CHUYEN
+        ↓
+    HUY_CHUYEN
+
+Không nằm trong MVP
+Thuật toán giá động phức tạp.
+Carpooling.
+Đặt nhiều chuyến cùng lúc.
+Đặt xe theo lịch dài hạn.
+Tối ưu tuyến đường bằng AI.
+4.4. Module 4 - Theo dõi Chuyến đi & Thanh toán (Ride Tracking & Payment)
+Mục đích
+
+Quản lý quá trình thực hiện chuyến đi, cập nhật vị trí tài xế và xử lý thanh toán sau khi chuyến hoàn thành.
+
+Business Goal liên quan
+BG-02: Nâng cao trải nghiệm khách hàng.
+BG-03: Tập trung hóa quản lý doanh thu và thanh toán.
+BG-05: Đảm bảo Fault Isolation.
+Chức năng trong phạm vi MVP
+Theo dõi chuyến
+Cập nhật vị trí GPS tài xế.
+Hiển thị vị trí tài xế cho khách hàng.
+Cập nhật trạng thái chuyến.
+Tài xế xác nhận đã đến điểm đón.
+Tài xế xác nhận đã đón khách.
+Tài xế bắt đầu chuyến.
+Tài xế hoàn thành chuyến.
+Thanh toán
+Tính cước chuyến.
+Chọn phương thức thanh toán.
+Tạo giao dịch.
+Gửi giao dịch đến Payment Provider.
+Nhận kết quả thanh toán.
+Lưu trạng thái giao dịch.
+Xử lý thanh toán thất bại.
+Không nằm trong MVP
+Ví điện tử nội bộ.
+Hệ thống trả góp.
+Loyalty Payment.
+Đối soát tài chính nâng cao.
+Dynamic Pricing phức tạp.
+4.5. Module 5 - Quản trị & Vận hành (Admin & Operation)
+Mục đích
+
+Cung cấp công cụ cho nhân viên vận hành quản lý khách hàng, tài xế và giám sát chuyến đi.
+
+Business Goal liên quan
+BG-04: Tối ưu hóa năng lực quản trị vận hành.
+BG-03: Tập trung hóa
 | **BG-07** | *Kiến trúc đủ linh hoạt để tương lai bổ sung dịch vụ, thanh toán, thông báo mới.* | **Đảm bảo tính linh hoạt & Khả năng mở rộng kiến trúc (Scalability & Extensibility)** cho định hướng phát triển dài hạn. | • Chi phí và thời gian tích hợp thêm 1 kênh thanh toán/thông báo mới $< 1$ tuần phát triển. |
