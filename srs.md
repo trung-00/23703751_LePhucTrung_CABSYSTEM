@@ -559,69 +559,43 @@ erDiagram
 
 ## 12. Bảng truy vết yêu cầu
 
-Bảng truy vết được sử dụng để kiểm soát mối liên hệ giữa mục tiêu nghiệp vụ, yêu cầu nghiệp vụ, mô hình quy trình nghiệp vụ, yêu cầu hệ thống, Use Case và tiêu chí chấp nhận.
 
-Chuỗi truy vết của hệ thống:
 
-**BG → BR → PBM → SR → UC → AC**
+| BG         | BR         | PBM                 | SR   | UC                                    | AC               |
+| ---------- | ---------- | ------------------- | ---- | ------------------------------------- | ---------------- |
+| BG01       | BR01       | BPM01               | SR01 | Chọn điểm đón                         | AC1, AC2         |
+| BG01       | BR01       | BPM01               | SR02 | Chọn điểm đến                         | AC3, AC4         |
+| BG01       | BR01       | BPM01               | SR03 | Chọn loại xe                          | AC5, AC6, AC7    |
+| BG01       | BR01       | BPM01               | SR04 | Tạo yêu cầu đặt xe                    | AC8, AC9, AC10   |
+| BG02       | BR02       | BPM01               | SR05 | Tìm tài xế                            | AC11, AC12, AC13 |
+| BG02       | BR02       | BPM01               | SR06 | Phân công tài xế                      | AC14, AC15, AC16 |
+| BG04       | BR04       | BPM01               | SR07 | Xử lý tài xế từ chối / không phản hồi | AC17, AC18, AC19 |
+| BG03, BG04 | BR03, BR04 | BPM01               | SR08 | Thông báo kết quả đặt xe              | AC20, AC21       |
+| BG01       | BR01       | BPM02               | SR09 | Nhận chuyến                           | AC22, AC23       |
+| BG01, BG03 | BR01, BR03 | BPM02               | SR10 | Cập nhật trạng thái chuyến đi         | AC24, AC25, AC26 |
+| BG02, BG03 | BR02, BR03 | BPM02               | SR11 | Cập nhật vị trí tài xế                | AC27, AC28       |
+| BG01       | BR01       | BPM02               | SR12 | Hoàn thành chuyến đi                  | AC29, AC30       |
+| BG01       | BR01       | BPM03               | SR13 | Tính cước chuyến đi                   | AC31, AC32       |
+| BG03       | BR03       | BPM03               | SR14 | Hiển thị số tiền thanh toán           | AC33, AC34       |
+| BG01, BG03 | BR01, BR03 | BPM03               | SR15 | Lựa chọn phương thức thanh toán       | AC35, AC36       |
+| BG01       | BR01       | BPM03               | SR16 | Thanh toán điện tử                    | AC37, AC38       |
+| BG06       | BR06       | BPM03               | SR17 | Xử lý kết quả thanh toán              | AC39, AC40       |
+| BG01, BG03 | BR01, BR03 | BPM03               | SR18 | Xử lý thanh toán thất bại             | AC41, AC42, AC43 |
+| BG05       | BR05       | BPM04               | SR19 | Quản lý khách hàng                    | AC44, AC45       |
+| BG05       | BR05       | BPM04               | SR20 | Quản lý tài xế / phương tiện          | AC46, AC47       |
+| BG05, BG06 | BR05, BR06 | BPM04               | SR21 | Theo dõi chuyến đi                    | AC48, AC49       |
+| BG05       | BR05       | BPM04               | SR22 | Xử lý chuyến đi bị lỗi                | AC50, AC51       |
+| BG07       | BR07       | BPM04               | SR23 | Ghi nhận thao tác vận hành            | AC52, AC53       |
+| BG06, BG11 | BR06, BR11 | BPM05               | SR24 | Tổng hợp dữ liệu báo cáo              | AC54, AC55       |
+| BG11       | BR11       | BPM05               | SR25 | Báo cáo hoạt động                     | AC56, AC57, AC58 |
+| BG07       | BR07       | BPM04               | SR26 | Xác thực người dùng                   | AC59, AC60       |
+| BG07       | BR07       | BPM04, BPM05        | SR27 | Kiểm soát quyền truy cập              | AC61, AC62       |
+| BG07       | BR07       | BPM02, BPM03, BPM04 | SR28 | Bảo vệ dữ liệu                        | AC63, AC64       |
+| BG08       | BR08       | BPM01, BPM03        | SR29 | Xử lý khi dịch vụ phụ trợ gặp sự cố   | AC65, AC66       |
+| BG09       | BR09       | BPM01, BPM02, BPM04 | SR30 | Mở rộng hệ thống                      | AC67, AC68       |
+| BG10       | BR10       | BPM01, BPM03, BPM04 | SR31 | Tích hợp và mở rộng dịch vụ           | AC69, AC70, AC71 |
+| BG07       | BR07       | BPM04               | SR32 | Ghi nhận và truy vết thao tác         | AC72, AC73, AC74 |
 
-Trong đó:
-
-* **BG (Business Goal):** Mục tiêu nghiệp vụ.
-* **BR (Business Requirement):** Yêu cầu nghiệp vụ.
-* **PBM (Process Business Model):** Mô hình quy trình nghiệp vụ.
-* **SR (System Requirement):** Yêu cầu hệ thống.
-* **UC (Use Case):** Chức năng/ca sử dụng của hệ thống.
-* **AC (Acceptance Criteria):** Tiêu chí chấp nhận dùng để xác định yêu cầu đã đạt hay chưa.
-
-### 12.1. Traceability Matrix
-
-| BG    | BR    | PBM    | SR    | UC    | AC                        |
-| ----- | ----- | ------ | ----- | ----- | ------------------------- |
-| BG-01 | BR-01 | PBM-01 | SR-01 | UC-03 | AC-01.1, AC-01.2          |
-| BG-01 | BR-01 | PBM-01 | SR-02 | UC-03 | AC-02.1, AC-02.2          |
-| BG-01 | BR-01 | PBM-01 | SR-03 | UC-03 | AC-03.1, AC-03.2, AC-03.3 |
-| BG-01 | BR-01 | PBM-01 | SR-04 | UC-03 | AC-04.1, AC-04.2          |
-| BG-02 | BR-02 | PBM-02 | SR-05 | UC-03 | AC-05.1, AC-05.2          |
-| BG-02 | BR-02 | PBM-02 | SR-06 | UC-05 | AC-06.1, AC-06.2          |
-| BG-02 | BR-02 | PBM-02 | SR-07 | UC-06 | AC-07.1, AC-07.2          |
-| BG-03 | BR-03 | PBM-03 | SR-08 | UC-07 | AC-08.1                   |
-| BG-03 | BR-03 | PBM-03 | SR-09 | UC-17 | AC-09.1, AC-09.2          |
-| BG-03 | BR-03 | PBM-03 | SR-10 | UC-07 | AC-10.1, AC-10.2          |
-| BG-03 | BR-03 | PBM-03 | SR-11 | UC-07 | AC-11.1                   |
-| BG-04 | BR-04 | PBM-04 | SR-12 | UC-14 | AC-12.1                   |
-| BG-04 | BR-04 | PBM-04 | SR-13 | UC-15 | AC-13.1                   |
-| BG-04 | BR-04 | PBM-04 | SR-14 | UC-14 | AC-14.1                   |
-| BG-04 | BR-04 | PBM-04 | SR-15 | UC-07 | AC-15.1, AC-15.2          |
-| BG-05 | BR-05 | PBM-05 | SR-16 | UC-10 | AC-16.1, AC-16.2          |
-| BG-05 | BR-05 | PBM-05 | SR-17 | UC-17 | AC-17.1                   |
-| BG-05 | BR-05 | PBM-05 | SR-18 | UC-10 | AC-18.1, AC-18.2          |
-| BG-05 | BR-05 | PBM-05 | SR-19 | UC-10 | AC-19.1                   |
-| BG-06 | BR-06 | PBM-06 | SR-20 | UC-16 | AC-20.1, AC-20.2          |
-| BG-06 | BR-06 | PBM-06 | SR-21 | UC-16 | AC-21.1                   |
-| BG-06 | BR-06 | PBM-06 | SR-22 | UC-13 | AC-22.1, AC-22.2          |
-| BG-07 | BR-07 | PBM-07 | SR-23 | UC-03 | AC-23.1, AC-23.2          |
-| BG-07 | BR-07 | PBM-07 | SR-24 | UC-03 | AC-24.1                   |
-| BG-08 | BR-08 | PBM-08 | SR-25 | UC-11 | AC-25.1                   |
-| BG-08 | BR-08 | PBM-08 | SR-26 | UC-11 | AC-26.1, AC-26.2          |
-| BG-08 | BR-08 | PBM-08 | SR-27 | UC-11 | AC-27.1                   |
-| BG-08 | BR-08 | PBM-08 | SR-28 | UC-11 | AC-28.1, AC-28.2          |
-| BG-08 | BR-08 | PBM-08 | SR-29 | UC-11 | AC-29.1                   |
-| BG-09 | BR-09 | PBM-09 | SR-30 | UC-12 | AC-30.1                   |
-| BG-09 | BR-09 | PBM-09 | SR-31 | UC-12 | AC-31.1, AC-31.2          |
-| BG-09 | BR-09 | PBM-09 | SR-32 | UC-12 | AC-32.1                   |
-| BG-10 | BR-10 | PBM-10 | SR-33 | UC-19 | AC-33.1                   |
-| BG-10 | BR-10 | PBM-10 | SR-34 | UC-20 | AC-34.1                   |
-| BG-10 | BR-10 | PBM-10 | SR-35 | UC-21 | AC-35.1                   |
-| BG-10 | BR-10 | PBM-10 | SR-36 | UC-22 | AC-36.1                   |
-| BG-11 | BR-11 | PBM-11 | SR-37 | UC-24 | AC-37.1                   |
-| BG-11 | BR-11 | PBM-11 | SR-38 | UC-24 | AC-38.1                   |
-| BG-11 | BR-11 | PBM-11 | SR-39 | UC-24 | AC-39.1                   |
-| BG-11 | BR-11 | PBM-11 | SR-40 | UC-23 | AC-40.1                   |
-| BG-12 | BR-12 | PBM-12 | SR-41 | UC-21 | AC-41.1                   |
-| BG-12 | BR-12 | PBM-12 | SR-42 | UC-03 | AC-42.1                   |
-| BG-12 | BR-12 | PBM-12 | SR-43 | UC-03 | AC-43.1                   |
-| BG-12 | BR-12 | PBM-12 | SR-44 | UC-11 | AC-44.1                   |
 
 
 bữa sau đặc tả API. Đặc tả từ SR. Mối SR là một API. 
