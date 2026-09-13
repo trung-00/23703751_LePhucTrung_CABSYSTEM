@@ -9,7 +9,7 @@
 | Nhân viên vận hành | Quản lý khách hàng, tài xế, phương tiện và chuyến đi; theo dõi các chuyến đang diễn ra và hỗ trợ xử lý các trường hợp chuyến bị lỗi. |
 | Nhà cung cấp dịch vụ thanh toán | Cung cấp dịch vụ thanh toán điện tử và xử lý các giao dịch thanh toán cho hệ thống CAB. |
 | Nhà cung cấp dịch vụ thông báo | Cung cấp các kênh gửi thông báo đến khách hàng và tài xế về đặt xe, chuyến đi và thanh toán. |
-## 2. Vẽ sơ đồ mermaid và Stakeholder Matrix
+## 2. Vẽ sơ đồ mermaid 
 ```mermaid
 flowchart LR
     CAB((CAB System))
@@ -30,7 +30,7 @@ flowchart LR
     CAB -->|Gửi thông báo| TB
     TB -->|Thông báo đến<br/>khách hàng và tài xế| CAB
 ```
-## Stakeholder Matrix
+## 3. Stakeholder Matrix
 
 ```mermaid
 quadrantChart
@@ -50,505 +50,144 @@ quadrantChart
     "NCC thông báo": [0.40, 0.45]
 ```
 
-# . CHUYỂN ĐỔI YÊU CẦU KHÁCH HÀNG THÀNH MỤC TIÊU NGHIỆP VỤ
+## 4. Chuyển đổi yêu cầu khách hàng thành Business Goals (BG)
 
-Dựa trên các yêu cầu của khách hàng, hệ thống CAB được chuyển đổi thành các mục tiêu nghiệp vụ (Business Goals). Mỗi mục tiêu được định danh bằng mã **BG** nhằm thuận tiện cho việc quản lý, theo dõi và liên kết với các chức năng của hệ thống.
-
-| Mã BG     | Mục tiêu nghiệp vụ                                                                                                                      |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **BG-01** | Cho phép khách hàng tạo yêu cầu chuyến đi bằng cách nhập điểm đón và điểm đến hợp lệ.                                                   |
-| **BG-02** | Cho phép khách hàng lựa chọn và xác nhận tài xế được hệ thống đề xuất cho chuyến đi.                                                    |
-| **BG-03** | Tự động tìm kiếm và đề xuất tài xế phù hợp dựa trên trạng thái hoạt động, vị trí GPS và khu vực điểm đón.                               |
-| **BG-04** | Cho phép tài xế nhận hoặc từ chối chuyến trong thời gian quy định và tự động tìm tài xế khác khi từ chối hoặc hết thời gian chờ.        |
-| **BG-05** | Cho phép khách hàng theo dõi trạng thái chuyến đi và vị trí tài xế theo thời gian thực.                                                 |
-| **BG-06** | Cho phép tài xế cập nhật trạng thái chuyến đi trong suốt quá trình thực hiện chuyến.                                                    |
-| **BG-07** | Tự động xác định số tiền khách hàng cần thanh toán và tạo thông tin thanh toán cho chuyến đi.                                           |
-| **BG-08** | Cho phép khách hàng thực hiện thanh toán và quản lý trạng thái giao dịch.                                                               |
-| **BG-09** | Cho phép khách hàng xem lại lịch sử chuyến đi và thông tin thanh toán liên quan.                                                        |
-| **BG-10** | Hỗ trợ nhân viên vận hành quản lý khách hàng, tài xế, chuyến đi và xử lý các sự cố trong quá trình vận hành.                            |
-| **BG-11** | Cung cấp các báo cáo cơ bản về chuyến đi, doanh thu, khách hàng và tài xế để hỗ trợ quản lý.                                            |
-| **BG-12** | Đảm bảo hoạt động đặt xe và các chức năng chính của hệ thống vẫn được duy trì khi dịch vụ thanh toán hoặc thông báo gặp sự cố tạm thời. |
+| Mã BG | Business Goal | Mô tả |
+|---|---|---|
+| BG01 | Nâng cao hiệu quả dịch vụ đặt xe | Xây dựng nền tảng CAB giúp tự động hóa quy trình từ đặt xe, tìm tài xế, thực hiện chuyến đến thanh toán và đánh giá. |
+| BG02 | Rút ngắn thời gian phân công tài xế | Tự động tìm kiếm và ưu tiên tài xế phù hợp, gần khách hàng nhằm tăng tốc độ đáp ứng yêu cầu đặt xe. |
+| BG03 | Nâng cao trải nghiệm khách hàng | Cung cấp thông tin minh bạch về tài xế, trạng thái chuyến đi, thời gian dự kiến, thanh toán và lịch sử chuyến. |
+| BG04 | Tăng khả năng đáp ứng nhu cầu đặt xe | Đảm bảo hệ thống có khả năng tiếp tục tìm tài xế khác khi tài xế từ chối hoặc không phản hồi, đồng thời thông báo rõ ràng khi không tìm được tài xế. |
+| BG05 | Tăng cường hiệu quả quản lý và vận hành | Cung cấp công cụ để nhân viên vận hành quản lý khách hàng, tài xế, phương tiện và chuyến đi, đồng thời hỗ trợ xử lý các trường hợp phát sinh. |
+| BG06 | Quản lý tập trung hoạt động và giao dịch | Tập trung dữ liệu chuyến đi, thanh toán và lịch sử giao dịch để hỗ trợ theo dõi và quản lý hoạt động kinh doanh. |
+| BG07 | Đảm bảo an toàn và bảo mật dữ liệu | Bảo vệ thông tin cá nhân, thông tin phương tiện, dữ liệu vị trí và dữ liệu giao dịch; kiểm soát quyền truy cập và lưu vết các thao tác quan trọng. |
+| BG08 | Đảm bảo tính ổn định và liên tục của dịch vụ | Duy trì hoạt động của hệ thống khi nhu cầu tăng cao và hạn chế việc một thành phần gặp lỗi làm ảnh hưởng đến toàn bộ hệ thống. |
+| BG09 | Hỗ trợ mở rộng quy mô kinh doanh | Xây dựng nền tảng có khả năng phục vụ số lượng lớn khách hàng và tài xế, đồng thời cho phép mở rộng các thành phần khi nhu cầu tăng. |
+| BG10 | Tạo nền tảng linh hoạt cho phát triển trong tương lai | Cho phép bổ sung loại dịch vụ, phương thức thanh toán, nhà cung cấp thông báo và các chức năng mới mà không phải xây dựng lại toàn bộ hệ thống. |
+| BG11 | Hỗ trợ ra quyết định kinh doanh | Cung cấp báo cáo về số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động của tài xế để ban lãnh đạo đánh giá và ra quyết định. |
 
 
+## Giới hạn module
+| Mã Module | Module | Business Goal liên quan |
+|---|---|---|
+| M01 | Quản lý khách hàng | BG03, BG06 |
+| M02 | Quản lý tài xế | BG02, BG04 |
+| M03 | Đặt xe và quản lý chuyến đi | BG01, BG02, BG03, BG04 |
+| M04 | Quản lý cước và thanh toán | BG01, BG06 |
+| M05 | Quản lý vận hành | BG05, BG06, BG08 |
 ---
 
-
-
-# . PHẠM VI MODULE HỆ THỐNG (SYSTEM MODULES)
-
-Để đảm bảo dự án CAB System có thể hoàn thành trong thời gian 7 tuần, hệ thống được giới hạn trong 5 module chính.
-
-##  Module 1 - Quản lý Khách hàng (Customer Management)
-
-**Mục đích:**
-Quản lý tài khoản và thông tin cơ bản của khách hàng, phục vụ quá trình đặt xe và sử dụng dịch vụ.
-
-**Business Goal:** BG-02, BG-04
-
-| STT | Chức năng MVP                |
-| --: | ---------------------------- |
-|   1 | Đăng ký tài khoản            |
-|   2 | Đăng nhập / đăng xuất        |
-|   3 | Xem thông tin cá nhân        |
-|   4 | Cập nhật thông tin cá nhân   |
-|   5 | Quản lý trạng thái tài khoản |
-|   6 | Xem lịch sử chuyến đi        |
-
-##  Module 2 - Quản lý Tài xế (Driver Management)
-
-**Mục đích:**
-Quản lý thông tin tài xế và trạng thái hoạt động, làm cơ sở cho việc tự động ghép tài xế với khách hàng.
-
-**Business Goal:** BG-01, BG-04, BG-05
-
-| STT | Chức năng MVP                        |
-| --: | ------------------------------------ |
-|   1 | Đăng nhập tài khoản tài xế           |
-|   2 | Xem / cập nhật thông tin tài xế      |
-|   3 | Cập nhật trạng thái Online / Offline |
-|   4 | Cập nhật trạng thái Available / Busy |
-|   5 | Cập nhật vị trí GPS                  |
-|   6 | Nhận đề xuất chuyến                  |
-|   7 | Chấp nhận chuyến                     |
-|   8 | Từ chối chuyến                       |
-|   9 | Xem lịch sử chuyến                   |
-
-## . Module 3 - Đặt xe & Ghép tài xế (Booking & Matching)
-
-**Mục đích:**
-Là module nghiệp vụ cốt lõi của CAB System, chịu trách nhiệm tiếp nhận yêu cầu đặt xe và tự động tìm tài xế phù hợp.
-
-**Business Goal:** BG-01, BG-02, BG-05
-
-| STT | Chức năng MVP                    |
-| --: | -------------------------------- |
-|   1 | Nhập điểm đón                    |
-|   2 | Nhập điểm đến                    |
-|   3 | Tạo yêu cầu đặt xe               |
-|   4 | Tính giá dự kiến                 |
-|   5 | Tìm tài xế phù hợp               |
-|   6 | Gửi đề xuất chuyến cho tài xế    |
-|   7 | Xử lý tài xế chấp nhận / từ chối |
-|   8 | Xử lý Timeout                    |
-|   9 | Retry tìm tài xế                 |
-|  10 | Xác nhận tài xế                  |
-|  11 | Hủy chuyến                       |
-|  12 | Quản lý trạng thái chuyến        |
-
-### Trạng thái chuyến
-
-| STT | Trạng thái          |
-| --: | ------------------- |
-|   1 | KHOI_TAO            |
-|   2 | TIM_TAI_XE          |
-|   3 | CHO_TAI_XE_XAC_NHAN |
-|   4 | DA_NHAN_CHUYEN      |
-|   5 | DA_DEN_DIEM_DON     |
-|   6 | DA_DON_KHACH        |
-|   7 | DANG_DI_CHUYEN      |
-|   8 | HOAN_THANH          |
-|   9 | HUY_CHUYEN          |
-
-## . Module 4 - Theo dõi Chuyến & Thanh toán (Ride Tracking & Payment)
-
-**Mục đích:**
-Quản lý quá trình thực hiện chuyến đi, cập nhật vị trí tài xế và xử lý thanh toán sau khi chuyến hoàn thành.
-
-**Business Goal:** BG-02, BG-03, BG-05
-
-| Nhóm            | STT | Chức năng MVP                         |
-| --------------- | --: | ------------------------------------- |
-| Theo dõi chuyến |   1 | Theo dõi chuyến                       |
-| Theo dõi chuyến |   2 | Cập nhật vị trí GPS tài xế            |
-| Theo dõi chuyến |   3 | Hiển thị vị trí tài xế cho khách hàng |
-| Theo dõi chuyến |   4 | Cập nhật trạng thái chuyến            |
-| Theo dõi chuyến |   5 | Tài xế xác nhận đã đến điểm đón       |
-| Theo dõi chuyến |   6 | Tài xế xác nhận đã đón khách          |
-| Theo dõi chuyến |   7 | Tài xế bắt đầu chuyến                 |
-| Theo dõi chuyến |   8 | Tài xế hoàn thành chuyến              |
-| Thanh toán      |   9 | Tính cước chuyến                      |
-| Thanh toán      |  10 | Chọn phương thức thanh toán           |
-| Thanh toán      |  11 | Tạo giao dịch                         |
-| Thanh toán      |  12 | Gửi giao dịch đến Payment Provider    |
-| Thanh toán      |  13 | Nhận kết quả thanh toán               |
-| Thanh toán      |  14 | Lưu trạng thái giao dịch              |
-| Thanh toán      |  15 | Xử lý thanh toán thất bại             |
-
-##  Module 5 - Quản trị & Vận hành (Admin & Operation)
-
-**Mục đích:**
-Cung cấp công cụ cho nhân viên vận hành quản lý khách hàng, tài xế và giám sát chuyến đi.
-
-**Business Goal:** BG-03, BG-04, BG-05
-
-| STT | Chức năng MVP                              |
-| --: | ------------------------------------------ |
-|   1 | Đăng nhập Admin / Operator                 |
-|   2 | Quản lý khách hàng                         |
-|   3 | Quản lý tài xế                             |
-|   4 | Xem trạng thái Online / Offline của tài xế |
-|   5 | Xem danh sách chuyến đi                    |
-|   6 | Xem chi tiết chuyến đi                     |
-|   7 | Theo dõi chuyến đang hoạt động             |
-|   8 | Hỗ trợ xử lý chuyến lỗi                    |
-|   9 | Xem giao dịch thanh toán                   |
-|  10 | Xem báo cáo cơ bản                         |
-
-## 4.6. Tổng quan phạm vi Module
-
-| Module              | Vai trò chính         |
-| ------------------- | --------------------- |
-| Customer Management | Quản lý khách hàng    |
-| Driver Management   | Quản lý tài xế        |
-| Booking & Matching  | Đặt xe và ghép tài xế |
-| Ride Tracking       | Theo dõi chuyến       |
-| Payment             | Thanh toán            |
-| Admin & Operation   | Quản trị và vận hành  |
-
-**Giới hạn MVP:**
-Không triển khai các chức năng nâng cao như Loyalty, Voucher nâng cao, Carpooling, Dynamic Pricing phức tạp, AI/ML, BI nâng cao và quản lý tài chính chuyên sâu.
-
----
-
-#  BUSINESS REQUIREMENTS (BR)
-
-Phần này mô tả các yêu cầu nghiệp vụ mà hệ thống CAB System phải đáp ứng để hỗ trợ quy trình đặt xe, quản lý tài xế, theo dõi chuyến đi, thanh toán và vận hành hệ thống.
-
-## 5.1. Danh sách Business Requirements
-
-| Mã    | Business Requirement                                                                                                                          | Module                           |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| BG-01 | Hệ thống phải cho phép khách hàng tạo yêu cầu chuyến đi bằng cách nhập điểm đón và điểm đến.                                                  | Quản lý Khách hàng / Đặt xe      |
-| BG-02 | Hệ thống phải cho phép khách hàng lựa chọn tài xế được hệ thống đề xuất và xác nhận chuyến đi.                                                | Đặt xe & Ghép tài xế             |
-| BG-03 | Hệ thống phải tự động tìm kiếm và đề xuất tài xế phù hợp dựa trên trạng thái hoạt động và vị trí hiện tại.                                    | Quản lý Tài xế / Matching        |
-| BG-04 | Hệ thống phải cho phép tài xế nhận hoặc từ chối yêu cầu chuyến đi trong một khoảng thời gian xác định.                                        | Quản lý Tài xế                   |
-| BG-05 | Hệ thống phải cho phép khách hàng theo dõi trạng thái chuyến đi và vị trí tài xế trong quá trình thực hiện chuyến.                            | Theo dõi Chuyến                  |
-| BG-06 | Hệ thống phải cho phép tài xế cập nhật trạng thái chuyến từ khi nhận chuyến đến khi hoàn thành hoặc hủy chuyến.                               | Quản lý Tài xế / Theo dõi Chuyến |
-| BG-07 | Hệ thống phải tự động tính cước chuyến dựa trên thông tin chuyến đi và cung cấp số tiền cần thanh toán cho khách hàng.                        | Thanh toán                       |
-| BG-08 | Hệ thống phải cho phép khách hàng thực hiện thanh toán và lưu lại trạng thái của giao dịch.                                                   | Thanh toán                       |
-| BG-09 | Hệ thống phải cho phép khách hàng xem lịch sử các chuyến đi và thông tin thanh toán tương ứng.                                                | Quản lý Khách hàng               |
-| BG-10 | Hệ thống phải cho phép nhân viên vận hành quản lý khách hàng, tài xế và theo dõi các chuyến đi đang hoạt động.                                | Quản trị & Vận hành              |
-| BG-11 | Hệ thống phải cho phép nhân viên vận hành xem thông tin giao dịch và báo cáo cơ bản về số chuyến, chuyến hoàn thành, chuyến hủy và doanh thu. | Quản trị & Vận hành              |
-| BG-12 | Hệ thống phải đảm bảo các chức năng đặt xe vẫn hoạt động khi dịch vụ thanh toán hoặc thông báo gặp sự cố tạm thời.                            | Toàn hệ thống                    |
-
----
-
-#  CHI TIẾT BUSINESS REQUIREMENTS
-
-## BG-01 - Tạo yêu cầu chuyến đi
-
-**Mô tả:**
-Hệ thống phải cho phép khách hàng tạo yêu cầu chuyến đi bằng cách nhập thông tin điểm đón và điểm đến.
-
-| Loại      | Nội dung                                       |
-| --------- | ---------------------------------------------- |
-| Điều kiện | Khách hàng đã đăng nhập                        |
-| Điều kiện | Điểm đón hợp lệ                                |
-| Điều kiện | Điểm đến hợp lệ                                |
-| Kết quả   | Hệ thống tạo một yêu cầu chuyến đi             |
-| Kết quả   | Yêu cầu được chuyển sang trạng thái TIM_TAI_XE |
-
-## BG-02 - Lựa chọn và xác nhận tài xế
-
-**Mô tả:**
-Hệ thống phải cho phép khách hàng lựa chọn tài xế được hệ thống đề xuất và xác nhận chuyến đi.
-
-| Kết quả                                      |
-| -------------------------------------------- |
-| Tài xế được gán vào chuyến                   |
-| Chuyến chuyển sang trạng thái DA_NHAN_CHUYEN |
-
-## BG-03 - Tự động ghép tài xế
-
-**Mô tả:**
-Hệ thống phải tự động tìm kiếm và đề xuất tài xế phù hợp cho yêu cầu chuyến đi.
-
-| STT | Tiêu chí lựa chọn                   |
-| --: | ----------------------------------- |
-|   1 | Tài xế đang Online                  |
-|   2 | Tài xế đang Available               |
-|   3 | Tài xế có vị trí GPS hợp lệ         |
-|   4 | Tài xế phù hợp với khu vực điểm đón |
-
-**Kết quả:**
-
-| STT | Kết quả                                                            |
-| --: | ------------------------------------------------------------------ |
-|   1 | Hệ thống gửi đề xuất chuyến đến tài xế                             |
-|   2 | Nếu tài xế từ chối hoặc Timeout, hệ thống tiếp tục tìm tài xế khác |
-
-## BG-04 - Tài xế nhận hoặc từ chối chuyến
-
-**Mô tả:**
-Hệ thống phải cho phép tài xế nhận hoặc từ chối yêu cầu chuyến đi trong thời gian quy định.
-
-| Hành động | Kết quả                                                      |
-| --------- | ------------------------------------------------------------ |
-| Accept    | Chuyến được xác nhận                                         |
-| Reject    | Hệ thống tìm tài xế khác                                     |
-| Timeout   | Hệ thống xem như tài xế không nhận chuyến và thực hiện Retry |
-
-## BG-05 - Theo dõi chuyến đi
-
-**Mô tả:**
-Hệ thống phải cho phép khách hàng theo dõi trạng thái chuyến và vị trí tài xế theo thời gian thực.
-
-| STT | Thông tin hiển thị         |
-| --: | -------------------------- |
-|   1 | Vị trí hiện tại của tài xế |
-|   2 | Trạng thái chuyến          |
-|   3 | Thông tin tài xế           |
-|   4 | Điểm đón                   |
-|   5 | Điểm đến                   |
-
-## BG-06 - Cập nhật trạng thái chuyến
-
-**Mô tả:**
-Hệ thống phải cho phép tài xế cập nhật trạng thái chuyến trong quá trình thực hiện.
-
-| STT | Trạng thái      |
-| --: | --------------- |
-|   1 | DA_NHAN_CHUYEN  |
-|   2 | DA_DEN_DIEM_DON |
-|   3 | DA_DON_KHACH    |
-|   4 | DANG_DI_CHUYEN  |
-|   5 | HOAN_THANH      |
-|   6 | HUY_CHUYEN      |
-
-**Điều kiện hủy:**
-Chuyến có thể chuyển sang HUY_CHUYEN khi khách hàng hoặc tài xế thực hiện hủy chuyến theo quy định.
-
-
-
-## BG-08 - Thanh toán chuyến đi
-
-**Mô tả:**
-Hệ thống phải cho phép khách hàng thực hiện thanh toán và lưu lại trạng thái giao dịch.
-
-| Trạng thái | Ý nghĩa                  |
-| ---------- | ------------------------ |
-| PENDING    | Giao dịch đang chờ xử lý |
-| SUCCESS    | Thanh toán thành công    |
-| FAILED     | Thanh toán thất bại      |
-
-Hệ thống không lưu thông tin thẻ nhạy cảm mà chỉ lưu thông tin cần thiết để quản lý giao dịch.
-
-## BG-09 - Lịch sử chuyến đi
-
-**Mô tả:**
-Hệ thống phải cho phép khách hàng xem lại lịch sử các chuyến đã thực hiện.
-
-| STT | Thông tin             |
-| --: | --------------------- |
-|   1 | Mã chuyến             |
-|   2 | Thời gian             |
-|   3 | Điểm đón              |
-|   4 | Điểm đến              |
-|   5 | Tài xế                |
-|   6 | Trạng thái chuyến     |
-|   7 | Số tiền thanh toán    |
-|   8 | Trạng thái thanh toán |
-
-#  MÔ HÌNH HÓA NGHIỆP VỤ (BUSINESS PROCESS MODELING)
-
-##  Tổng quan các quy trình nghiệp vụ
-
-Dựa trên các Business Requirements từ BG-01 đến BG-09, hệ thống CAB có thể được mô hình hóa thành các quy trình nghiệp vụ chính sau:
-
-| STT | Quy trình nghiệp vụ             | Business Requirement liên quan |
-| --: | ------------------------------- | ------------------------------ |
-|   1 | Tạo yêu cầu chuyến đi           | BG-01                          |
-|   2 | Lựa chọn và xác nhận tài xế     | BG-02                          |
-|   3 | Tự động ghép tài xế             | BG-03                          |
-|   4 | Tài xế nhận hoặc từ chối chuyến | BG-04                          |
-|   5 | Theo dõi chuyến đi              | BG-05                          |
-|   6 | Cập nhật trạng thái chuyến      | BG-06                          |
-|   7 | Thanh toán chuyến đi            | BG-08                          |
-|   8 | Xem lịch sử chuyến đi           | BG-09                          |
-
-> **Lưu ý:** Nội dung BG-07 không được cung cấp trong phần Business Requirements trên, nên không đưa vào mô hình chi tiết để tránh tự bổ sung thông tin ngoài tài liệu.
-
----
-
-##  Quy trình tạo yêu cầu chuyến đi
-
-**Mục đích:** Cho phép khách hàng tạo một yêu cầu chuyến đi bằng cách cung cấp điểm đón và điểm đến.
-
-| Thành phần           | Nội dung                                               |
-| -------------------- | ------------------------------------------------------ |
-| Actor chính          | Khách hàng                                             |
-| Điều kiện trước      | Khách hàng đã đăng nhập                                |
-| Dữ liệu đầu vào      | Điểm đón, điểm đến                                     |
-| Xử lý                | Hệ thống kiểm tra tính hợp lệ của điểm đón và điểm đến |
-| Kết quả              | Tạo yêu cầu chuyến đi                                  |
-| Trạng thái tiếp theo | TIM_TAI_XE                                             |
-
-**Luồng nghiệp vụ:**
-
-| Bước | Hoạt động                                      |
-| ---: | ---------------------------------------------- |
-|    1 | Khách hàng đăng nhập hệ thống                  |
-|    2 | Khách hàng nhập điểm đón                       |
-|    3 | Khách hàng nhập điểm đến                       |
-|    4 | Hệ thống kiểm tra tính hợp lệ của thông tin    |
-|    5 | Hệ thống tạo yêu cầu chuyến đi                 |
-|    6 | Yêu cầu được chuyển sang trạng thái TIM_TAI_XE |
-
----
-
-## . Quy trình tự động ghép và xác nhận tài xế
-
-**Mục đích:** Tìm kiếm tài xế phù hợp và thực hiện xác nhận chuyến đi.
-
-###  Tiêu chí tìm kiếm tài xế
-
-| STT | Tiêu chí                            |
-| --: | ----------------------------------- |
-|   1 | Tài xế đang Online                  |
-|   2 | Tài xế đang Available               |
-|   3 | Tài xế có vị trí GPS hợp lệ         |
-|   4 | Tài xế phù hợp với khu vực điểm đón |
-
-### Luồng nghiệp vụ
-
-| Bước | Hoạt động                                                                 |
-| ---: | ------------------------------------------------------------------------- |
-|    1 | Hệ thống nhận yêu cầu chuyến ở trạng thái TIM_TAI_XE                      |
-|    2 | Hệ thống tìm kiếm tài xế phù hợp theo các tiêu chí                        |
-|    3 | Hệ thống gửi đề xuất chuyến đến tài xế                                    |
-|    4 | Tài xế lựa chọn Accept hoặc Reject                                        |
-|    5 | Nếu Accept, chuyến được xác nhận                                          |
-|    6 | Nếu Reject, hệ thống tìm tài xế khác                                      |
-|    7 | Nếu Timeout, hệ thống xem tài xế như không nhận chuyến và thực hiện Retry |
-|    8 | Khi tài xế được xác nhận, chuyến chuyển sang trạng thái DA_NHAN_CHUYEN    |
-
----
-
-## Quy trình theo dõi và thực hiện chuyến đi
-
-**Mục đích:** Cho phép khách hàng theo dõi thông tin chuyến đi và vị trí tài xế theo thời gian thực.
-
-### Thông tin được hiển thị
-
-| STT | Thông tin                  |
-| --: | -------------------------- |
-|   1 | Vị trí hiện tại của tài xế |
-|   2 | Trạng thái chuyến          |
-|   3 | Thông tin tài xế           |
-|   4 | Điểm đón                   |
-|   5 | Điểm đến                   |
-
-###  Luồng cập nhật trạng thái
-
-| STT | Trạng thái      |
-| --: | --------------- |
-|   1 | DA_NHAN_CHUYEN  |
-|   2 | DA_DEN_DIEM_DON |
-|   3 | DA_DON_KHACH    |
-|   4 | DANG_DI_CHUYEN  |
-|   5 | HOAN_THANH      |
-|   6 | HUY_CHUYEN      |
-
-**Luồng nghiệp vụ:**
-
-| Bước | Hoạt động                                                                                                    |
-| ---: | ------------------------------------------------------------------------------------------------------------ |
-|    1 | Tài xế nhận chuyến                                                                                           |
-|    2 | Tài xế di chuyển đến điểm đón                                                                                |
-|    3 | Tài xế cập nhật trạng thái DA_DEN_DIEM_DON                                                                   |
-|    4 | Tài xế đón khách và cập nhật DA_DON_KHACH                                                                    |
-|    5 | Tài xế thực hiện chuyến và cập nhật DANG_DI_CHUYEN                                                           |
-|    6 | Khi đến điểm đến, tài xế cập nhật HOAN_THANH                                                                 |
-|    7 | Trong quá trình thực hiện, chuyến có thể chuyển sang HUY_CHUYEN khi khách hàng hoặc tài xế hủy theo quy định |
-|    8 | Khách hàng theo dõi trạng thái và vị trí tài xế trên hệ thống                                                |
-
----
-
-## Quy trình thanh toán chuyến đi
-
-**Mục đích:** Cho phép khách hàng thanh toán và hệ thống quản lý trạng thái giao dịch.
-
-| Thành phần         | Nội dung                                            |
-| ------------------ | --------------------------------------------------- |
-| Actor chính        | Khách hàng                                          |
-| Đầu vào            | Yêu cầu thanh toán chuyến đi                        |
-| Xử lý              | Hệ thống thực hiện và cập nhật trạng thái giao dịch |
-| Kết quả            | Lưu trạng thái giao dịch                            |
-| Thông tin nhạy cảm | Hệ thống không lưu thông tin thẻ nhạy cảm           |
-
-### Trạng thái giao dịch
-
-| Trạng thái | Ý nghĩa                  |
-| ---------- | ------------------------ |
-| PENDING    | Giao dịch đang chờ xử lý |
-| SUCCESS    | Thanh toán thành công    |
-| FAILED     | Thanh toán thất bại      |
-
-### Luồng nghiệp vụ
-
-| Bước | Hoạt động                                                 |
-| ---: | --------------------------------------------------------- |
-|    1 | Khách hàng thực hiện thanh toán                           |
-|    2 | Hệ thống tạo/xử lý giao dịch                              |
-|    3 | Giao dịch ở trạng thái PENDING                            |
-|    4 | Nếu thanh toán thành công, trạng thái chuyển sang SUCCESS |
-|    5 | Nếu thanh toán thất bại, trạng thái chuyển sang FAILED    |
-|    6 | Hệ thống lưu thông tin cần thiết để quản lý giao dịch     |
-
----
-
-## 6.6. Quy trình xem lịch sử chuyến đi
-
-**Mục đích:** Cho phép khách hàng xem lại các chuyến đi đã thực hiện và thông tin thanh toán liên quan.
-
-### Thông tin lịch sử
-
-| STT | Thông tin             |
-| --: | --------------------- |
-|   1 | Mã chuyến             |
-|   2 | Thời gian             |
-|   3 | Điểm đón              |
-|   4 | Điểm đến              |
-|   5 | Tài xế                |
-|   6 | Trạng thái chuyến     |
-|   7 | Số tiền thanh toán    |
-|   8 | Trạng thái thanh toán |
-
-### Luồng nghiệp vụ
-
-| Bước | Hoạt động                                                |
-| ---: | -------------------------------------------------------- |
-|    1 | Khách hàng truy cập chức năng lịch sử chuyến đi          |
-|    2 | Hệ thống lấy danh sách các chuyến đã thực hiện           |
-|    3 | Hệ thống hiển thị thông tin từng chuyến                  |
-|    4 | Khách hàng xem thông tin chuyến và trạng thái thanh toán |
-
----
-
-##  Tổng hợp luồng nghiệp vụ chính
-
-| Bước | Quy trình                       | Trạng thái / Kết quả             |
-| ---: | ------------------------------- | -------------------------------- |
-|    1 | Khách hàng tạo yêu cầu chuyến   | TIM_TAI_XE                       |
-|    2 | Hệ thống tìm tài xế phù hợp     | Tài xế được đề xuất              |
-|    3 | Tài xế nhận chuyến              | DA_NHAN_CHUYEN                   |
-|    4 | Tài xế đến điểm đón             | DA_DEN_DIEM_DON                  |
-|    5 | Tài xế đón khách                | DA_DON_KHACH                     |
-|    6 | Tài xế thực hiện chuyến         | DANG_DI_CHUYEN                   |
-|    7 | Chuyến hoàn thành               | HOAN_THANH                       |
-|    8 | Khách hàng thực hiện thanh toán | PENDING / SUCCESS / FAILED       |
-|    9 | Hệ thống lưu thông tin chuyến   | Hiển thị trong lịch sử chuyến đi |
-
-### Luồng xử lý khi tài xế không nhận chuyến
-
-| Tình huống                 | Xử lý                                       |
-| -------------------------- | ------------------------------------------- |
-| Tài xế Accept              | Chuyến được xác nhận                        |
-| Tài xế Reject              | Hệ thống tìm tài xế khác                    |
-| Tài xế Timeout             | Hệ thống thực hiện Retry và tìm tài xế khác |
-| Không có tài xế phù hợp    | Tiếp tục tìm kiếm theo cơ chế của hệ thống  |
-| Khách hàng hoặc tài xế hủy | Chuyến chuyển sang HUY_CHUYEN               |
-
+## 5. Business Requirements (BR)
+
+| Mã BR | Business Requirement | Business Goal liên quan | Module liên quan |
+|---|---|---|---|
+| BR01 | Hệ thống phải cung cấp nền tảng đặt xe giúp khách hàng thực hiện đầy đủ quy trình từ tạo yêu cầu đặt xe đến hoàn thành chuyến đi. | BG01 | M01, M03 |
+| BR02 | Hệ thống phải tự động tìm kiếm và phân công tài xế phù hợp dựa trên vị trí, trạng thái hoạt động và các tiêu chí vận hành. | BG02 | M02, M03 |
+| BR03 | Hệ thống phải cung cấp cho khách hàng thông tin về tài xế, trạng thái chuyến đi, thời gian dự kiến và thông tin thanh toán. | BG03 | M01, M03, M04 |
+| BR04 | Hệ thống phải tiếp tục tìm kiếm tài xế khác khi tài xế từ chối hoặc không phản hồi và thông báo cho khách hàng khi không tìm được tài xế. | BG04 | M02, M03 |
+| BR05 | Hệ thống phải hỗ trợ nhân viên vận hành quản lý khách hàng, tài xế, phương tiện và các chuyến đi. | BG05 | M01, M02, M05 |
+| BR06 | Hệ thống phải tập trung và quản lý dữ liệu chuyến đi, thanh toán và lịch sử giao dịch để phục vụ hoạt động vận hành. | BG06 | M01, M04, M05 |
+| BR07 | Hệ thống phải bảo vệ thông tin cá nhân, thông tin phương tiện, dữ liệu vị trí và dữ liệu giao dịch của người dùng. | BG07 | M01, M02, M04, M05 |
+| BR08 | Hệ thống phải duy trì hoạt động ổn định khi nhu cầu sử dụng tăng cao và hạn chế ảnh hưởng đến chức năng đặt xe khi một thành phần gặp sự cố. | BG08 | M03, M04, M05 |
+| BR09 | Hệ thống phải hỗ trợ mở rộng số lượng khách hàng, tài xế và các thành phần của hệ thống khi quy mô kinh doanh tăng. | BG09 | M01, M02, M03, M05 |
+| BR10 | Hệ thống phải cho phép bổ sung loại dịch vụ, phương thức thanh toán và nhà cung cấp thông báo mới mà không phải xây dựng lại toàn bộ hệ thống. | BG10 | M03, M04, M05 |
+| BR11 | Hệ thống phải cung cấp báo cáo về số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động của tài xế. | BG11 | M05 |
+
+## 6. Mô hình hóa quy trình nghiệp vụ (BPM)
+
+Dựa trên các Business Requirement (BR), hệ thống CAB được mô hình hóa thành các quy trình nghiệp vụ chính sau:
+
+| Mã BPM | Quy trình nghiệp vụ | Business Requirement liên quan |
+|---|---|---|
+| BPM01 | Đặt xe và phân công tài xế | BR01, BR02, BR03, BR04 |
+| BPM02 | Thực hiện và hoàn thành chuyến đi | BR01, BR03 |
+| BPM03 | Tính cước và thanh toán | BR01, BR03, BR06 |
+| BPM04 | Quản lý và hỗ trợ vận hành | BR05, BR06, BR07, BR08 |
+| BPM05 | Báo cáo và theo dõi hoạt động | BR06, BR11 |
+### BPM01 – Đặt xe và phân công tài xế
+
+Mục đích: Cho phép khách hàng tạo yêu cầu đặt xe và hệ thống tìm kiếm, phân công tài xế phù hợp.
+
+| STT | Actor | Hoạt động |
+|---|---|---|
+| 1 | Khách hàng | Nhập điểm đón, điểm đến và loại xe. |
+| 2 | Khách hàng | Gửi yêu cầu đặt xe. |
+| 3 | Hệ thống | Tiếp nhận và ghi nhận yêu cầu đặt xe. |
+| 4 | Hệ thống | Tìm kiếm tài xế phù hợp dựa trên vị trí, trạng thái hoạt động và tiêu chí vận hành. |
+| 5 | Hệ thống | Gửi yêu cầu chuyến đi đến tài xế phù hợp. |
+| 6 | Tài xế | Tiếp nhận và phản hồi yêu cầu chuyến đi. |
+| 7 | Hệ thống | Nếu tài xế chấp nhận, xác nhận phân công tài xế. |
+| 8 | Hệ thống | Nếu tài xế từ chối hoặc không phản hồi, tiếp tục tìm tài xế khác. |
+| 9 | Hệ thống | Thông báo thông tin tài xế cho khách hàng khi chuyến được phân công. |
+| 10 | Hệ thống | Thông báo cho khách hàng nếu không tìm được tài xế phù hợp. |
+
+### BPM02 – Thực hiện và hoàn thành chuyến đi
+
+Mục đích: Quản lý quá trình tài xế thực hiện chuyến đi từ khi nhận chuyến đến khi hoàn thành.
+
+| STT | Actor | Hoạt động |
+|---|---|---|
+| 1 | Tài xế | Nhận chuyến đã được phân công. |
+| 2 | Tài xế | Di chuyển đến điểm đón. |
+| 3 | Tài xế | Cập nhật trạng thái đã đến điểm đón. |
+| 4 | Tài xế | Đón khách hàng. |
+| 5 | Tài xế | Cập nhật trạng thái đã đón khách. |
+| 6 | Tài xế | Thực hiện chuyến đi đến điểm đến. |
+| 7 | Tài xế | Cập nhật trạng thái đang di chuyển. |
+| 8 | Tài xế | Đến điểm đến. |
+| 9 | Tài xế | Cập nhật trạng thái hoàn thành chuyến đi. |
+| 10 | Hệ thống | Ghi nhận chuyến đi đã hoàn thành và cập nhật trạng thái chuyến. |
+
+### BPM03 – Tính cước và thanh toán
+
+Mục đích: Xác định số tiền khách hàng phải thanh toán và ghi nhận kết quả thanh toán sau khi chuyến đi hoàn thành.
+
+| STT | Actor | Hoạt động |
+|---|---|---|
+| 1 | Hệ thống | Nhận thông tin chuyến đi đã hoàn thành. |
+| 2 | Hệ thống | Xác định thông tin cần thiết để tính cước. |
+| 3 | Hệ thống | Tính số tiền khách hàng phải thanh toán. |
+| 4 | Hệ thống | Hiển thị số tiền phải thanh toán cho khách hàng. |
+| 5 | Khách hàng | Lựa chọn phương thức thanh toán. |
+| 6 | Khách hàng | Thực hiện thanh toán theo phương thức đã chọn. |
+| 7 | Hệ thống | Nếu thanh toán tiền mặt, ghi nhận kết quả thanh toán. |
+| 8 | Hệ thống | Nếu thanh toán điện tử, gửi yêu cầu đến nhà cung cấp dịch vụ thanh toán. |
+| 9 | Nhà cung cấp dịch vụ thanh toán | Xử lý giao dịch và trả kết quả thanh toán. |
+| 10 | Hệ thống | Ghi nhận kết quả giao dịch nếu thanh toán thành công. |
+| 11 | Hệ thống | Thông báo thanh toán thất bại và cho phép khách hàng thực hiện lại theo chính sách nếu giao dịch không thành công. |
+
+### BPM04 – Quản lý và hỗ trợ vận hành
+
+Mục đích: Hỗ trợ nhân viên vận hành quản lý các đối tượng và xử lý các vấn đề phát sinh trong quá trình hoạt động của hệ thống.
+
+| STT | Actor | Hoạt động |
+|---|---|---|
+| 1 | Nhân viên vận hành | Đăng nhập vào hệ thống. |
+| 2 | Nhân viên vận hành | Theo dõi tình trạng hoạt động của hệ thống. |
+| 3 | Nhân viên vận hành | Quản lý thông tin khách hàng. |
+| 4 | Nhân viên vận hành | Quản lý thông tin tài xế và phương tiện. |
+| 5 | Nhân viên vận hành | Theo dõi các chuyến đi đang diễn ra. |
+| 6 | Nhân viên vận hành | Kiểm tra các trường hợp chuyến đi bị lỗi hoặc phát sinh vấn đề. |
+| 7 | Nhân viên vận hành | Thực hiện xử lý vấn đề theo quy trình vận hành. |
+| 8 | Hệ thống | Cập nhật và lưu kết quả xử lý. |
+| 9 | Hệ thống | Ghi nhận các thao tác quản lý và xử lý quan trọng để phục vụ kiểm tra, truy vết. |
+
+### BPM05 – Báo cáo và theo dõi hoạt động
+
+Mục đích: Tổng hợp dữ liệu hoạt động để cung cấp thông tin cho ban giám đốc theo dõi và ra quyết định.
+
+| STT | Actor | Hoạt động |
+|---|---|---|
+| 1 | Hệ thống | Thu thập dữ liệu chuyến đi. |
+| 2 | Hệ thống | Thu thập dữ liệu thanh toán và doanh thu. |
+| 3 | Hệ thống | Thu thập dữ liệu hoạt động của tài xế. |
+| 4 | Hệ thống | Tổng hợp và xử lý dữ liệu. |
+| 5 | Hệ thống | Tạo báo cáo hoạt động. |
+| 6 | Ban giám đốc | Xem số lượng chuyến đi. |
+| 7 | Ban giám đốc | Xem doanh thu. |
+| 8 | Ban giám đốc | Xem tỷ lệ hoàn thành và tỷ lệ hủy chuyến. |
+| 9 | Ban giám đốc | Xem hiệu quả hoạt động của tài xế. |
+| 10 | Ban giám đốc | Sử dụng thông tin báo cáo để đánh giá và ra quyết định kinh doanh. |
 
 ### 7. System Requirements
 
