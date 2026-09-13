@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Rating API
+  description: API quản lý đánh giá chuyến đi.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local server
+paths:
+  /ratings:
+    get:
+      summary: Lấy danh sách đánh giá
+      operationId: getRatings
+      tags: [Ratings]
+      responses:
+        '200':
+          description: Danh sách đánh giá
+    post:
+      summary: Tạo đánh giá
+      operationId: createRating
+      tags: [Ratings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingRequest'
+      responses:
+        '201':
+          description: Tạo đánh giá thành công
+  /ratings/{rating_id}:
+    get:
+      summary: Lấy đánh giá theo ID
+      operationId: getRatingById
+      tags: [Ratings]
+      parameters:
+        - $ref: '#/components/parameters/RatingId'
+      responses:
+        '200':
+          description: Tìm thấy đánh giá
+    put:
+      summary: Cập nhật đánh giá
+      operationId: updateRating
+      tags: [Ratings]
+      parameters:
+        - $ref: '#/components/parameters/RatingId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingRequest'
+      responses:
+        '200':
+          description: Cập nhật thành công
+    delete:
+      summary: Xóa đánh giá
+      operationId: deleteRating
+      tags: [Ratings]
+      parameters:
+        - $ref: '#/components/parameters/RatingId'
+      responses:
+        '204':
+          description: Xóa đánh giá thành công
+components:
+  parameters:
+    RatingId:
+      name: rating_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    RatingRequest:
+      type: object
+      required: [trip_id, customer_id, driver_id, score]
+      properties:
+        trip_id:
+          type: integer
+        customer_id:
+          type: integer
+        driver_id:
+          type: integer
+        score:
+          type: integer
+          minimum: 1
+          maximum: 5
+        comment:
+          type: string
+    Rating:
+      allOf:
+        - $ref: '#/components/schemas/RatingRequest'
+        - type: object
+          properties:
+            rating_id:
+              type: integer
