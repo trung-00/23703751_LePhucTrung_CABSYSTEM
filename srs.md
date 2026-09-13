@@ -598,4 +598,3 @@ erDiagram
 
 
 
-bữa sau đặc tả API. Đặc tả từ SR. Mối SR là một API. 
