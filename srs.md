@@ -9,7 +9,7 @@
 | Nhân viên vận hành | Quản lý khách hàng, tài xế, phương tiện và chuyến đi; theo dõi các chuyến đang diễn ra và hỗ trợ xử lý các trường hợp chuyến bị lỗi. |
 | Nhà cung cấp dịch vụ thanh toán | Cung cấp dịch vụ thanh toán điện tử và xử lý các giao dịch thanh toán cho hệ thống CAB. |
 | Nhà cung cấp dịch vụ thông báo | Cung cấp các kênh gửi thông báo đến khách hàng và tài xế về đặt xe, chuyến đi và thanh toán. |
-## 2. Vẽ sơ đồ mermaid 
+## 2. Vẽ sơ đồ mermaid và stakeholders matrix
 ```mermaid
 flowchart LR
     CAB((CAB System))
@@ -30,7 +30,7 @@ flowchart LR
     CAB -->|Gửi thông báo| TB
     TB -->|Thông báo đến<br/>khách hàng và tài xế| CAB
 ```
-## 3. Stakeholder Matrix
+##  Stakeholder Matrix
 
 ```mermaid
 quadrantChart
@@ -50,7 +50,7 @@ quadrantChart
     "NCC thông báo": [0.40, 0.45]
 ```
 
-## 4. Chuyển đổi yêu cầu khách hàng thành Business Goals (BG)
+## 3. Chuyển đổi yêu cầu khách hàng thành Business Goals (BG)
 
 | Mã BG | Business Goal | Mô tả |
 |---|---|---|
@@ -77,7 +77,7 @@ quadrantChart
 | M05 | Quản lý vận hành | BG05, BG06, BG08 |
 ---
 
-## 5. Business Requirements (BR)
+## 4. Business Requirements (BR)
 
 | Mã BR | Business Requirement | Business Goal liên quan | Module liên quan |
 |---|---|---|---|
@@ -93,7 +93,7 @@ quadrantChart
 | BR10 | Hệ thống phải cho phép bổ sung loại dịch vụ, phương thức thanh toán và nhà cung cấp thông báo mới mà không phải xây dựng lại toàn bộ hệ thống. | BG10 | M03, M04, M05 |
 | BR11 | Hệ thống phải cung cấp báo cáo về số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động của tài xế. | BG11 | M05 |
 
-## 6. Mô hình hóa quy trình nghiệp vụ (BPM)
+## 5. Mô hình hóa quy trình nghiệp vụ (BPM)
 
 Dựa trên các Business Requirement (BR), hệ thống CAB được mô hình hóa thành các quy trình nghiệp vụ chính sau:
 
@@ -189,99 +189,119 @@ Mục đích: Tổng hợp dữ liệu hoạt động để cung cấp thông ti
 | 9 | Ban giám đốc | Xem hiệu quả hoạt động của tài xế. |
 | 10 | Ban giám đốc | Sử dụng thông tin báo cáo để đánh giá và ra quyết định kinh doanh. |
 
-### 7. System Requirements
+## 6. Thiết kế chức năng nghiệp vụ
 
-| Mã SR     | System Requirement                                                                                                     |
-| --------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **SR-01** | Hệ thống cho phép nhập và lưu điểm đón.                                                                                |
-| **SR-02** | Hệ thống cho phép nhập và lưu điểm đến.                                                                                |
-| **SR-03** | Hệ thống kiểm tra tính hợp lệ của điểm đón và điểm đến.                                                                |
-| **SR-04** | Hệ thống tạo yêu cầu đặt xe và lưu trạng thái yêu cầu.                                                                 |
-| **SR-05** | Hệ thống hiển thị danh sách tài xế được đề xuất.                                                                       |
-| **SR-06** | Hệ thống cho phép khách hàng chọn tài xế.                                                                              |
-| **SR-07** | Hệ thống cho phép khách hàng xác nhận tài xế đã chọn.                                                                  |
-| **SR-08** | Hệ thống xác định tài xế đang trực tuyến và sẵn sàng nhận chuyến.                                                      |
-| **SR-09** | Hệ thống nhận và cập nhật vị trí GPS của tài xế.                                                                       |
-| **SR-10** | Hệ thống xác định tài xế phù hợp dựa trên khu vực và vị trí hiện tại.                                                  |
-| **SR-11** | Hệ thống gửi yêu cầu chuyến xe đến tài xế phù hợp.                                                                     |
-| **SR-12** | Hệ thống cho phép tài xế chấp nhận chuyến xe.                                                                          |
-| **SR-13** | Hệ thống cho phép tài xế từ chối chuyến xe.                                                                            |
-| **SR-14** | Hệ thống tự động xử lý trường hợp tài xế không phản hồi trong thời gian quy định.                                      |
-| **SR-15** | Hệ thống tự động tìm tài xế khác khi chuyến xe bị từ chối hoặc hết thời gian phản hồi.                                 |
-| **SR-16** | Hệ thống hiển thị trạng thái chuyến xe theo thời gian thực.                                                            |
-| **SR-17** | Hệ thống cập nhật vị trí tài xế trong quá trình thực hiện chuyến xe.                                                   |
-| **SR-18** | Hệ thống hiển thị vị trí tài xế trên bản đồ cho khách hàng.                                                            |
-| **SR-19** | Hệ thống hiển thị thông tin tài xế, điểm đón và điểm đến của chuyến xe.                                                |
-| **SR-20** | Hệ thống cho phép tài xế cập nhật trạng thái chuyến xe.                                                                |
-| **SR-21** | Hệ thống kiểm tra tính hợp lệ khi chuyển đổi trạng thái chuyến xe.                                                     |
-| **SR-22** | Hệ thống cho phép hủy chuyến xe theo điều kiện được quy định.                                                          |
-| **SR-23** | Hệ thống tự động tính toán giá cước chuyến xe.                                                                         |
-| **SR-24** | Hệ thống xác định và hiển thị số tiền khách hàng cần thanh toán.                                                       |
-| **SR-25** | Hệ thống cho phép khách hàng lựa chọn phương thức thanh toán.                                                          |
-| **SR-26** | Hệ thống tạo giao dịch thanh toán cho chuyến xe.                                                                       |
-| **SR-27** | Hệ thống tiếp nhận kết quả xử lý thanh toán từ đơn vị cung cấp dịch vụ thanh toán.                                     |
-| **SR-28** | Hệ thống lưu trạng thái giao dịch gồm PENDING, SUCCESS hoặc FAILED.                                                    |
-| **SR-29** | Hệ thống không lưu trữ thông tin nhạy cảm của thẻ thanh toán.                                                          |
-| **SR-30** | Hệ thống cho phép khách hàng xem lịch sử các chuyến xe.                                                                |
-| **SR-31** | Hệ thống hiển thị thông tin chi tiết của từng chuyến xe trong lịch sử.                                                 |
-| **SR-32** | Hệ thống hiển thị thông tin thanh toán tương ứng với chuyến xe.                                                        |
-| **SR-33** | Hệ thống cho phép nhân viên vận hành quản lý thông tin khách hàng.                                                     |
-| **SR-34** | Hệ thống cho phép nhân viên vận hành quản lý thông tin tài xế.                                                         |
-| **SR-35** | Hệ thống cho phép nhân viên vận hành xem danh sách và chi tiết chuyến xe.                                              |
-| **SR-36** | Hệ thống cho phép nhân viên vận hành theo dõi các chuyến xe đang hoạt động.                                            |
-| **SR-37** | Hệ thống cung cấp số liệu tổng số chuyến xe.                                                                           |
-| **SR-38** | Hệ thống cung cấp số liệu chuyến xe hoàn thành và bị hủy.                                                              |
-| **SR-39** | Hệ thống cung cấp số liệu doanh thu.                                                                                   |
-| **SR-40** | Hệ thống cho phép nhân viên vận hành xem thông tin giao dịch thanh toán.                                               |
-| **SR-41** | Hệ thống ghi nhận lỗi khi dịch vụ thanh toán hoặc thông báo tạm thời không hoạt động.                                  |
-| **SR-42** | Hệ thống đảm bảo không mất yêu cầu đặt xe khi dịch vụ bên thứ ba tạm thời bị gián đoạn.                                |
-| **SR-43** | Hệ thống vẫn duy trì các chức năng đặt xe và quản lý chuyến xe khi dịch vụ thanh toán hoặc thông báo gặp lỗi tạm thời. |
-| **SR-44** | Hệ thống cho phép thực hiện lại giao dịch thanh toán sau khi dịch vụ được khôi phục.                                   |
+| BPM | Chức năng nghiệp vụ | API đề xuất | Mục đích |
+|---|---|---|---|
+| BPM01 - Đặt xe và phân công tài xế | Chọn điểm đón | API xác định địa điểm đón | Xác định vị trí khách hàng muốn được đón. |
+| BPM01 - Đặt xe và phân công tài xế | Chọn điểm đến | API xác định địa điểm đến | Xác định nơi khách hàng muốn di chuyển đến. |
+| BPM01 - Đặt xe và phân công tài xế | Chọn loại xe | API lấy danh sách loại xe | Cho phép khách hàng lựa chọn loại xe phù hợp. |
+| BPM01 - Đặt xe và phân công tài xế | Tạo yêu cầu đặt xe | API tạo yêu cầu đặt xe | Ghi nhận thông tin chuyến đi và tạo yêu cầu đặt xe. |
+| BPM01 - Đặt xe và phân công tài xế | Tìm tài xế | API tìm kiếm tài xế phù hợp | Tìm tài xế dựa trên vị trí, trạng thái hoạt động và tiêu chí vận hành. |
+| BPM01 - Đặt xe và phân công tài xế | Phân công tài xế | API phân công tài xế | Gửi yêu cầu và xác nhận tài xế thực hiện chuyến đi. |
+| BPM01 - Đặt xe và phân công tài xế | Xử lý tài xế từ chối / không phản hồi | API tìm tài xế tiếp theo | Tiếp tục tìm tài xế khác mà không yêu cầu khách hàng đặt lại chuyến. |
+| BPM01 - Đặt xe và phân công tài xế | Thông báo kết quả đặt xe | API gửi thông báo đặt xe | Thông báo cho khách hàng kết quả phân công tài xế. |
+| BPM02 - Thực hiện và hoàn thành chuyến đi | Nhận chuyến | API nhận chuyến | Cho phép tài xế chấp nhận chuyến được phân công. |
+| BPM02 - Thực hiện và hoàn thành chuyến đi | Cập nhật trạng thái chuyến đi | API cập nhật trạng thái chuyến | Ghi nhận trạng thái hiện tại của chuyến đi. |
+| BPM02 - Thực hiện và hoàn thành chuyến đi | Cập nhật vị trí tài xế | API cập nhật vị trí tài xế | Cập nhật vị trí tài xế để hỗ trợ theo dõi và tìm kiếm tài xế. |
+| BPM02 - Thực hiện và hoàn thành chuyến đi | Hoàn thành chuyến đi | API hoàn thành chuyến đi | Ghi nhận chuyến đi đã kết thúc. |
+| BPM03 - Tính cước và thanh toán | Tính cước chuyến đi | API tính cước | Xác định số tiền khách hàng phải thanh toán. |
+| BPM03 - Tính cước và thanh toán | Hiển thị số tiền thanh toán | API lấy thông tin cước | Cung cấp số tiền phải thanh toán cho khách hàng. |
+| BPM03 - Tính cước và thanh toán | Thanh toán tiền mặt | API ghi nhận thanh toán tiền mặt | Ghi nhận kết quả thanh toán bằng tiền mặt. |
+| BPM03 - Tính cước và thanh toán | Thanh toán điện tử | API tạo giao dịch thanh toán | Gửi yêu cầu thanh toán điện tử đến nhà cung cấp dịch vụ. |
+| BPM03 - Tính cước và thanh toán | Xử lý kết quả thanh toán | API cập nhật trạng thái thanh toán | Ghi nhận kết quả thành công hoặc thất bại của giao dịch. |
+| BPM03 - Tính cước và thanh toán | Xử lý thanh toán thất bại | API thanh toán lại | Cho phép khách hàng thực hiện lại giao dịch khi thanh toán thất bại. |
+| BPM04 - Quản lý và hỗ trợ vận hành | Quản lý khách hàng | API quản lý khách hàng | Quản lý và cập nhật thông tin khách hàng phục vụ vận hành. |
+| BPM04 - Quản lý và hỗ trợ vận hành | Quản lý tài xế | API quản lý tài xế | Quản lý thông tin và trạng thái hoạt động của tài xế. |
+| BPM04 - Quản lý và hỗ trợ vận hành | Quản lý phương tiện | API quản lý phương tiện | Quản lý thông tin các phương tiện tham gia hoạt động. |
+| BPM04 - Quản lý và hỗ trợ vận hành | Theo dõi chuyến đi | API lấy thông tin chuyến đi | Theo dõi tình trạng và thông tin các chuyến đang diễn ra. |
+| BPM04 - Quản lý và hỗ trợ vận hành | Xử lý chuyến đi bị lỗi | API xử lý sự cố chuyến đi | Hỗ trợ nhân viên vận hành xử lý các vấn đề phát sinh. |
+| BPM04 - Quản lý và hỗ trợ vận hành | Ghi nhận thao tác vận hành | API ghi nhật ký thao tác | Lưu lại các thao tác quan trọng để phục vụ kiểm tra và truy vết. |
+| BPM05 - Báo cáo và theo dõi hoạt động | Báo cáo số lượng chuyến | API lấy dữ liệu số lượng chuyến | Cung cấp số lượng chuyến để theo dõi hoạt động. |
+| BPM05 - Báo cáo và theo dõi hoạt động | Báo cáo doanh thu | API lấy dữ liệu doanh thu | Cung cấp thông tin doanh thu cho ban giám đốc. |
+| BPM05 - Báo cáo và theo dõi hoạt động | Báo cáo tỷ lệ hoàn thành | API lấy tỷ lệ hoàn thành chuyến | Theo dõi mức độ hoàn thành các chuyến đi. |
+| BPM05 - Báo cáo và theo dõi hoạt động | Báo cáo tỷ lệ hủy | API lấy tỷ lệ hủy chuyến | Theo dõi tình trạng hủy chuyến trong hệ thống. |
+| BPM05 - Báo cáo và theo dõi hoạt động | Báo cáo hiệu quả tài xế | API lấy dữ liệu hiệu quả tài xế | Đánh giá hiệu quả hoạt động của tài xế. |
+
+## 8. System Requirements (SR)
+
+| Mã SR | System Requirement | BPM liên quan | Chức năng nghiệp vụ liên quan |
+|---|---|---|---|
+| SR01 | Hệ thống phải cho phép khách hàng nhập và xác định điểm đón của chuyến đi. | BPM01 | Chọn điểm đón |
+| SR02 | Hệ thống phải cho phép khách hàng nhập và xác định điểm đến của chuyến đi. | BPM01 | Chọn điểm đến |
+| SR03 | Hệ thống phải cung cấp danh sách các loại xe để khách hàng lựa chọn. | BPM01 | Chọn loại xe |
+| SR04 | Hệ thống phải cho phép khách hàng tạo yêu cầu đặt xe dựa trên điểm đón, điểm đến và loại xe đã chọn. | BPM01 | Tạo yêu cầu đặt xe |
+| SR05 | Hệ thống phải tìm kiếm tài xế phù hợp dựa trên vị trí, trạng thái hoạt động và các tiêu chí vận hành. | BPM01 | Tìm tài xế |
+| SR06 | Hệ thống phải gửi yêu cầu chuyến đi đến tài xế phù hợp và ghi nhận phản hồi của tài xế. | BPM01 | Phân công tài xế |
+| SR07 | Hệ thống phải tiếp tục tìm tài xế khác khi tài xế được đề xuất từ chối hoặc không phản hồi trong thời gian quy định. | BPM01 | Xử lý tài xế từ chối / không phản hồi |
+| SR08 | Hệ thống phải thông báo cho khách hàng khi chuyến đi đã được phân công tài xế hoặc khi không tìm được tài xế. | BPM01 | Thông báo kết quả đặt xe |
+| SR09 | Hệ thống phải cho phép tài xế chấp nhận chuyến đi được phân công. | BPM02 | Nhận chuyến |
+| SR10 | Hệ thống phải cho phép tài xế cập nhật trạng thái chuyến đi theo từng giai đoạn. | BPM02 | Cập nhật trạng thái chuyến đi |
+| SR11 | Hệ thống phải ghi nhận và cập nhật vị trí hiện tại của tài xế trong quá trình hoạt động. | BPM02 | Cập nhật vị trí tài xế |
+| SR12 | Hệ thống phải cho phép tài xế cập nhật trạng thái hoàn thành chuyến đi. | BPM02 | Hoàn thành chuyến đi |
+| SR13 | Hệ thống phải tính số tiền khách hàng phải thanh toán dựa trên thông tin chuyến đi và loại dịch vụ. | BPM03 | Tính cước chuyến đi |
+| SR14 | Hệ thống phải hiển thị số tiền khách hàng phải thanh toán sau khi chuyến đi hoàn thành. | BPM03 | Hiển thị số tiền thanh toán |
+| SR15 | Hệ thống phải hỗ trợ khách hàng lựa chọn phương thức thanh toán tiền mặt hoặc thanh toán điện tử. | BPM03 | Thanh toán tiền mặt / điện tử |
+| SR16 | Hệ thống phải gửi yêu cầu thanh toán điện tử đến nhà cung cấp dịch vụ thanh toán và tiếp nhận kết quả giao dịch. | BPM03 | Thanh toán điện tử |
+| SR17 | Hệ thống phải ghi nhận kết quả thanh toán của chuyến đi. | BPM03 | Xử lý kết quả thanh toán |
+| SR18 | Hệ thống phải thông báo khi thanh toán điện tử thất bại và cho phép khách hàng thực hiện lại giao dịch theo chính sách. | BPM03 | Xử lý thanh toán thất bại |
+| SR19 | Hệ thống phải cho phép nhân viên vận hành quản lý thông tin khách hàng. | BPM04 | Quản lý khách hàng |
+| SR20 | Hệ thống phải cho phép nhân viên vận hành quản lý thông tin tài xế và phương tiện. | BPM04 | Quản lý tài xế / phương tiện |
+| SR21 | Hệ thống phải cho phép nhân viên vận hành theo dõi các chuyến đi đang diễn ra. | BPM04 | Theo dõi chuyến đi |
+| SR22 | Hệ thống phải cho phép nhân viên vận hành ghi nhận và xử lý các trường hợp chuyến đi bị lỗi hoặc phát sinh vấn đề. | BPM04 | Xử lý chuyến đi bị lỗi |
+| SR23 | Hệ thống phải ghi nhận nhật ký đối với các thao tác quản lý và xử lý quan trọng. | BPM04 | Ghi nhận thao tác vận hành |
+| SR24 | Hệ thống phải tổng hợp dữ liệu chuyến đi, thanh toán và hoạt động tài xế để tạo báo cáo. | BPM05 | Báo cáo và theo dõi hoạt động |
+| SR25 | Hệ thống phải cung cấp báo cáo về số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động của tài xế. | BPM05 | Báo cáo hoạt động |
+| SR26 | Hệ thống phải yêu cầu người dùng xác thực trước khi sử dụng các chức năng yêu cầu quyền truy cập. | BPM04 | Quản lý và hỗ trợ vận hành |
+| SR27 | Hệ thống phải kiểm soát quyền truy cập dựa trên vai trò của khách hàng, tài xế, nhân viên vận hành và ban giám đốc. | BPM04, BPM05 | Quản lý và hỗ trợ vận hành / Báo cáo và theo dõi hoạt động |
+| SR28 | Hệ thống phải bảo vệ thông tin cá nhân, thông tin phương tiện, dữ liệu vị trí và dữ liệu giao dịch trong quá trình lưu trữ và truyền tải. | BPM02, BPM03, BPM04 | Cập nhật vị trí tài xế / Thanh toán / Quản lý vận hành |
+| SR29 | Hệ thống phải hạn chế việc một thành phần như thanh toán hoặc thông báo gặp sự cố làm gián đoạn toàn bộ quy trình đặt xe. | BPM01, BPM03 | Đặt xe / Thanh toán |
+| SR30 | Hệ thống phải có khả năng mở rộng khi số lượng khách hàng, tài xế và chuyến đi tăng. | BPM01, BPM02, BPM04 | Đặt xe / Thực hiện chuyến / Quản lý vận hành |
+| SR31 | Hệ thống phải cho phép tích hợp thêm phương thức thanh toán, nhà cung cấp thông báo và loại dịch vụ mới mà không phải xây dựng lại toàn bộ hệ thống. | BPM01, BPM03, BPM04 | Thông báo kết quả đặt xe / Thanh toán / Quản lý vận hành |
+| SR32 | Hệ thống phải ghi nhận các thao tác quan trọng của người dùng để phục vụ kiểm tra và truy vết. | BPM04 | Ghi nhận thao tác vận hành |
 
 ## 8. Business Rules
 
-| Mã Rule     | Business Rule                                                                                            |
-| ----------- | -------------------------------------------------------------------------------------------------------- |
-| **RULE-01** | Khách hàng phải cung cấp đầy đủ điểm đón và điểm đến trước khi đặt xe.                                   |
-| **RULE-02** | Điểm đón và điểm đến phải hợp lệ để hệ thống tạo yêu cầu đặt xe.                                         |
-| **RULE-03** | Chỉ tài xế đang trực tuyến và sẵn sàng nhận chuyến mới được đưa vào danh sách tìm kiếm.                  |
-| **RULE-04** | Tài xế được đề xuất phải phù hợp với vị trí và khu vực của chuyến xe.                                    |
-| **RULE-05** | Một chuyến xe chỉ được xác nhận cho một tài xế tại một thời điểm.                                        |
-| **RULE-06** | Tài xế phải phản hồi yêu cầu chuyến xe trong thời gian quy định.                                         |
-| **RULE-07** | Khi tài xế từ chối hoặc không phản hồi, hệ thống phải tìm tài xế khác.                                   |
-| **RULE-08** | Trạng thái chuyến xe phải được cập nhật theo đúng trình tự nghiệp vụ.                                    |
-| **RULE-09** | Chỉ tài xế được phân công mới có quyền cập nhật trạng thái chuyến xe.                                    |
-| **RULE-10** | Giá cước phải được hệ thống tự động tính dựa trên thông tin chuyến xe.                                   |
-| **RULE-11** | Số tiền thanh toán phải tương ứng với giá cước của chuyến xe.                                            |
-| **RULE-12** | Mỗi giao dịch thanh toán phải gắn với một chuyến xe cụ thể.                                              |
-| **RULE-13** | Giao dịch thanh toán phải có trạng thái PENDING, SUCCESS hoặc FAILED.                                    |
-| **RULE-14** | Không được lưu trữ thông tin nhạy cảm của thẻ thanh toán trên hệ thống.                                  |
-| **RULE-15** | Khách hàng chỉ được xem lịch sử các chuyến xe thuộc tài khoản của mình.                                  |
-| **RULE-16** | Nhân viên vận hành được quyền quản lý thông tin khách hàng, tài xế và chuyến xe theo quyền hạn được cấp. |
-| **RULE-17** | Chỉ nhân viên vận hành có quyền xem và quản lý các chuyến xe đang hoạt động.                             |
-| **RULE-18** | Doanh thu được tính dựa trên các giao dịch thanh toán hợp lệ.                                            |
-| **RULE-19** | Khi dịch vụ thanh toán hoặc thông báo bị gián đoạn, hệ thống không được làm mất yêu cầu đặt xe.          |
-| **RULE-20** | Các giao dịch thanh toán thất bại có thể được thực hiện lại khi dịch vụ thanh toán được khôi phục.       |
+| Mã BR | Mô tả |
+|---|---|
+| BR01 | Khách hàng phải cung cấp đầy đủ điểm đón, điểm đến và loại xe trước khi gửi yêu cầu đặt xe. |
+| BR02 | Chỉ những tài xế đang ở trạng thái sẵn sàng nhận chuyến mới được đưa vào danh sách tìm kiếm tài xế. |
+| BR03 | Tài xế được ưu tiên phân công dựa trên vị trí gần khách hàng và các tiêu chí vận hành đã được xác định. |
+| BR04 | Khi tài xế từ chối hoặc không phản hồi trong thời gian quy định, hệ thống phải chuyển sang tìm tài xế phù hợp tiếp theo. |
+| BR05 | Khách hàng không phải tạo lại yêu cầu đặt xe khi hệ thống chuyển sang tìm tài xế khác. |
+| BR06 | Một chuyến đi chỉ được phân công cho một tài xế tại một thời điểm. |
+| BR07 | Tài xế phải nhận chuyến trước khi được phép thực hiện và cập nhật trạng thái chuyến đi. |
+| BR08 | Trạng thái chuyến đi phải được cập nhật theo đúng trình tự từ nhận chuyến, đến điểm đón, đón khách, đang di chuyển và hoàn thành. |
+| BR09 | Chỉ tài xế được phân công cho chuyến mới được cập nhật trạng thái và vị trí của chuyến đó. |
+| BR10 | Chuyến đi chỉ được chuyển sang trạng thái hoàn thành khi tài xế xác nhận đã đến điểm đến. |
+| BR11 | Cước chuyến đi phải được tính dựa trên loại dịch vụ và thông tin thực tế của chuyến đi theo chính sách tính cước của Công ty ABC. |
+| BR12 | Khách hàng phải thanh toán số tiền cước được hệ thống xác định sau khi chuyến đi hoàn thành. |
+| BR13 | Khi thanh toán điện tử thất bại, hệ thống phải thông báo cho khách hàng và cho phép thực hiện lại theo chính sách thanh toán. |
+| BR14 | Hệ thống không được lưu trữ thông tin nhạy cảm của thẻ hoặc tài khoản thanh toán; việc xử lý thông tin này do nhà cung cấp dịch vụ thanh toán thực hiện. |
+| BR15 | Chỉ nhân viên vận hành có quyền phù hợp mới được quản lý thông tin khách hàng, tài xế, phương tiện và chuyến đi. |
+| BR16 | Chỉ người dùng có vai trò phù hợp mới được truy cập các chức năng tương ứng với vai trò của mình. |
+| BR17 | Các thao tác quản lý và xử lý quan trọng phải được ghi nhận để phục vụ kiểm tra và truy vết. |
+| BR18 | Báo cáo phải được tổng hợp từ dữ liệu chuyến đi, thanh toán và hoạt động tài xế đã được ghi nhận trong hệ thống. |
+| BR19 | Khi không tìm được tài xế phù hợp, hệ thống phải thông báo cho khách hàng thay vì tự động hủy mà không có thông tin. |
+| BR20 | Khi một dịch vụ phụ như thanh toán hoặc thông báo gặp sự cố, chức năng đặt xe và quản lý chuyến đi không được bị dừng hoàn toàn. |
+## 9. Yêu cầu phi chức năng (NFR)
 
-## 9. Nghiệp vụ phi chức năng
-
-| Mã NFR     | Nghiệp vụ phi chức năng                                                                                          |
-| ---------- | ---------------------------------------------------------------------------------------------------------------- |
-| **NFR-01** | Hệ thống phải có thời gian phản hồi nhanh đối với các thao tác đặt xe, tìm tài xế và cập nhật trạng thái.        |
-| **NFR-02** | Hệ thống phải hỗ trợ cập nhật vị trí tài xế gần như theo thời gian thực trong quá trình thực hiện chuyến xe.     |
-| **NFR-03** | Hệ thống phải đảm bảo tính sẵn sàng của các chức năng đặt xe và quản lý chuyến xe.                               |
-| **NFR-04** | Hệ thống phải đảm bảo dữ liệu yêu cầu đặt xe không bị mất khi dịch vụ bên thứ ba tạm thời gián đoạn.             |
-| **NFR-05** | Hệ thống phải bảo vệ thông tin tài khoản và dữ liệu cá nhân của khách hàng, tài xế.                              |
-| **NFR-06** | Hệ thống phải phân quyền truy cập phù hợp với từng nhóm người dùng.                                              |
-| **NFR-07** | Hệ thống phải bảo mật thông tin và giao dịch thanh toán, không lưu trữ dữ liệu thẻ nhạy cảm.                     |
-| **NFR-08** | Hệ thống phải đảm bảo tính toàn vẹn và nhất quán của dữ liệu chuyến xe và giao dịch.                             |
-| **NFR-09** | Hệ thống phải có khả năng xử lý nhiều yêu cầu đặt xe đồng thời mà không làm gián đoạn hoạt động.                 |
-| **NFR-10** | Hệ thống phải ghi nhận và lưu trữ nhật ký các lỗi và sự kiện quan trọng để phục vụ việc kiểm tra và xử lý sự cố. |
-| **NFR-11** | Giao diện hệ thống phải dễ sử dụng, rõ ràng và phù hợp với thao tác trên máy tính và thiết bị di động.           |
-| **NFR-12** | Hệ thống phải có khả năng mở rộng để đáp ứng số lượng khách hàng, tài xế và chuyến xe tăng trong tương lai.      |
-| **NFR-13** | Hệ thống phải đảm bảo khả năng khôi phục dữ liệu và hoạt động sau khi xảy ra sự cố hệ thống.                     |
-| **NFR-14** | Hệ thống phải tương thích với các trình duyệt web phổ biến.                                                      |
-| **NFR-15** | Hệ thống phải duy trì hoạt động ổn định trong suốt thời gian cung cấp dịch vụ.                                   |
+| Mã NFR | Yêu cầu phi chức năng | Liên quan |
+|---|---|---|
+| NFR01 | Hệ thống phải đảm bảo người dùng được xác thực trước khi truy cập các chức năng yêu cầu đăng nhập. | BG07, BR07 |
+| NFR02 | Hệ thống phải kiểm soát quyền truy cập dựa trên vai trò của khách hàng, tài xế, nhân viên vận hành và ban giám đốc. | BG07, BR07 |
+| NFR03 | Hệ thống phải bảo vệ thông tin cá nhân, thông tin phương tiện, dữ liệu vị trí và dữ liệu giao dịch trong quá trình lưu trữ và truyền tải. | BG07, BR07 |
+| NFR04 | Hệ thống không được lưu trữ thông tin nhạy cảm của thẻ hoặc tài khoản thanh toán và phải sử dụng nhà cung cấp dịch vụ thanh toán để xử lý thông tin này. | BG07, BR07 |
+| NFR05 | Hệ thống phải ghi nhận các thao tác quản lý và xử lý quan trọng để phục vụ kiểm tra và truy vết. | BG07, BR07 |
+| NFR06 | Hệ thống phải duy trì hoạt động ổn định khi số lượng người dùng và yêu cầu đặt xe tăng cao. | BG08, BR08 |
+| NFR07 | Khi một thành phần như dịch vụ thanh toán hoặc thông báo gặp sự cố, hệ thống phải hạn chế ảnh hưởng đến các chức năng đặt xe và quản lý chuyến đi. | BG08, BR08 |
+| NFR08 | Hệ thống phải có khả năng mở rộng khi số lượng khách hàng, tài xế và chuyến đi tăng mà không ảnh hưởng đáng kể đến hoạt động của hệ thống. | BG09, BR09 |
+| NFR09 | Hệ thống phải cho phép mở rộng hoặc thay thế các thành phần như dịch vụ thanh toán và dịch vụ thông báo mà không phải xây dựng lại toàn bộ hệ thống. | BG10, BR10 |
+| NFR10 | Hệ thống phải hỗ trợ tích hợp với các nhà cung cấp dịch vụ bên ngoài thông qua giao diện tích hợp phù hợp. | BG10, BR10 |
+| NFR11 | Hệ thống phải đảm bảo dữ liệu chuyến đi, thanh toán và thông tin người dùng được lưu trữ nhất quán và hạn chế mất mát dữ liệu khi xảy ra sự cố. | BG06, BG08, BR06, BR08 |
+| NFR12 | Hệ thống phải đảm bảo các chức năng chính của quy trình đặt xe có thể hoạt động độc lập tương đối với các dịch vụ phụ trợ như thanh toán và thông báo. | BG08, BR08 |
+| NFR13 | Hệ thống phải cho phép triển khai hoặc cập nhật từng chức năng mà không yêu cầu dừng toàn bộ hệ thống khi điều kiện kỹ thuật cho phép. | BG08, BG10 |
+| NFR14 | Hệ thống phải đảm bảo khả năng phục vụ đồng thời nhiều khách hàng và tài xế trong thời gian cao điểm. | BG08, BG09 |
 
 ## 10. Xác định Entity và Mô hình thực thể kết hợp
 
