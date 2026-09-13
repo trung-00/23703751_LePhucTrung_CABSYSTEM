@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: Driver Management API
+  description: API quản lý tài xế.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local server
+paths:
+  /drivers:
+    get:
+      summary: Lấy danh sách tài xế
+      operationId: getDrivers
+      tags: [Drivers]
+      responses:
+        '200':
+          description: Lấy danh sách tài xế thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Driver'
+    post:
+      summary: Tạo tài xế mới
+      operationId: createDriver
+      tags: [Drivers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverRequest'
+      responses:
+        '201':
+          description: Tạo tài xế thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Driver'
+  /drivers/{driver_id}:
+    get:
+      summary: Lấy thông tin tài xế
+      operationId: getDriverById
+      tags: [Drivers]
+      parameters:
+        - $ref: '#/components/parameters/DriverId'
+      responses:
+        '200':
+          description: Tìm thấy tài xế
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Driver'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: Cập nhật tài xế
+      operationId: updateDriver
+      tags: [Drivers]
+      parameters:
+        - $ref: '#/components/parameters/DriverId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverRequest'
+      responses:
+        '200':
+          description: Cập nhật thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Driver'
+    delete:
+      summary: Xóa tài xế
+      operationId: deleteDriver
+      tags: [Drivers]
+      parameters:
+        - $ref: '#/components/parameters/DriverId'
+      responses:
+        '204':
+          description: Xóa tài xế thành công
+components:
+  parameters:
+    DriverId:
+      name: driver_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  schemas:
+    DriverRequest:
+      type: object
+      required: [full_name, phone, status]
+      properties:
+        full_name:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+          enum: [available, busy, offline]
+        current_location:
+          type: string
+    Driver:
+      allOf:
+        - $ref: '#/components/schemas/DriverRequest'
+        - type: object
+          properties:
+            driver_id:
+              type: integer
+              format: int64
+  responses:
+    NotFound:
+      description: Không tìm thấy dữ liệu

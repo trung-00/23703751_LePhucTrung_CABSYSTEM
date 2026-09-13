@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: Vehicle Type API
+  description: API quản lý loại xe.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local server
+paths:
+  /vehicle-types:
+    get:
+      summary: Lấy danh sách loại xe
+      operationId: getVehicleTypes
+      tags: [VehicleTypes]
+      responses:
+        '200':
+          description: Danh sách loại xe
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleType'
+    post:
+      summary: Tạo loại xe
+      operationId: createVehicleType
+      tags: [VehicleTypes]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleTypeRequest'
+      responses:
+        '201':
+          description: Tạo loại xe thành công
+  /vehicle-types/{vehicle_type_id}:
+    put:
+      summary: Cập nhật loại xe
+      operationId: updateVehicleType
+      tags: [VehicleTypes]
+      parameters:
+        - $ref: '#/components/parameters/VehicleTypeId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleTypeRequest'
+      responses:
+        '200':
+          description: Cập nhật thành công
+    delete:
+      summary: Xóa loại xe
+      operationId: deleteVehicleType
+      tags: [VehicleTypes]
+      parameters:
+        - $ref: '#/components/parameters/VehicleTypeId'
+      responses:
+        '204':
+          description: Xóa thành công
+components:
+  parameters:
+    VehicleTypeId:
+      name: vehicle_type_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    VehicleTypeRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    VehicleType:
+      allOf:
+        - $ref: '#/components/schemas/VehicleTypeRequest'
+        - type: object
+          properties:
+            vehicle_type_id:
+              type: integer
