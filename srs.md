@@ -1,44 +1,54 @@
 
+## 1. Tìm kiếm Stakeholders quan trọng
 
-# . BÊN LIÊN QUAN HỆ THỐNG (STAKEHOLDERS)
+| Tên Stakeholder | Vai trò |
+|---|---|
+| Ban giám đốc Công ty ABC | Định hướng mục tiêu, phê duyệt yêu cầu và phạm vi hệ thống; theo dõi doanh thu, số lượng chuyến, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động. |
+| Khách hàng | Sử dụng hệ thống để đăng ký, đặt xe, theo dõi chuyến đi, thanh toán, xem lịch sử và đánh giá tài xế. |
+| Tài xế | Nhận và thực hiện chuyến đi; cập nhật trạng thái, vị trí, thông tin cá nhân và phương tiện. |
+| Nhân viên vận hành | Quản lý khách hàng, tài xế, phương tiện và chuyến đi; theo dõi các chuyến đang diễn ra và hỗ trợ xử lý các trường hợp chuyến bị lỗi. |
+| Nhà cung cấp dịch vụ thanh toán | Cung cấp dịch vụ thanh toán điện tử và xử lý các giao dịch thanh toán cho hệ thống CAB. |
+| Nhà cung cấp dịch vụ thông báo | Cung cấp các kênh gửi thông báo đến khách hàng và tài xế về đặt xe, chuyến đi và thanh toán. |
+## 2. Vẽ sơ đồ mermaid và Stakeholder Matrix
+```mermaid
+flowchart LR
+    CAB((CAB System))
 
-| Stakeholder                             | Vai trò                                                                                                       |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Khách hàng (Customer)**               | Người sử dụng dịch vụ, tạo yêu cầu đặt xe, theo dõi chuyến đi, thực hiện thanh toán và xem lịch sử chuyến đi. |
-| **Tài xế (Driver)**                     | Cung cấp dịch vụ vận chuyển, nhận hoặc từ chối chuyến, cập nhật trạng thái chuyến và cung cấp vị trí GPS.     |
-| **Nhân viên vận hành (Admin/Operator)** | Quản lý khách hàng, tài xế, chuyến đi, hỗ trợ xử lý sự cố và theo dõi hoạt động của hệ thống.                 |
-| **Ban Giám Đốc**                        | Sponsor dự án, định hướng phát triển hệ thống, theo dõi tiến độ triển khai và hiệu quả hoạt động kinh doanh.  |
-| **Bộ phận Kế toán**                     | Theo dõi doanh thu, quản lý và đối soát các giao dịch thanh toán.                                             |
+    BGĐ[Ban giám đốc<br/>Công ty ABC]
+    KH[Khách hàng]
+    TX[Tài xế]
+    NV[Nhân viên vận hành]
+    TT[Nhà cung cấp<br/>dịch vụ thanh toán]
+    TB[Nhà cung cấp<br/>dịch vụ thông báo]
+
+    BGĐ -->|Định hướng, phê duyệt,<br/>theo dõi báo cáo| CAB
+    KH -->|Đăng ký, đặt xe,<br/>theo dõi, thanh toán, đánh giá| CAB
+    TX -->|Nhận chuyến, thực hiện chuyến,<br/>cập nhật trạng thái và vị trí| CAB
+    NV -->|Quản lý và hỗ trợ<br/>vận hành hệ thống| CAB
+    CAB -->|Gửi yêu cầu<br/>thanh toán điện tử| TT
+    TT -->|Kết quả giao dịch| CAB
+    CAB -->|Gửi thông báo| TB
+    TB -->|Thông báo đến<br/>khách hàng và tài xế| CAB
+```
+## Stakeholder Matrix
 
 ```mermaid
-flowchart TD
-    A([Bắt đầu]) --> B[Khách hàng nhập điểm đón và điểm đến]
-    B --> C{Thông tin hợp lệ?}
-
-    C -- Không --> B
-    C -- Có --> D[Tạo yêu cầu chuyến đi]
-    D --> E[Trạng thái: TIM_TAI_XE]
-
-    E --> F[Hệ thống tìm tài xế phù hợp]
-    F --> G[Gửi đề xuất chuyến đến tài xế]
-
-    G --> H{Tài xế xử lý}
-
-    H -- Accept --> I[Chuyến được xác nhận]
-    H -- Reject --> F
-    H -- Timeout --> F
-
-    I --> J[Trạng thái: DA_NHAN_CHUYEN]
-    J --> K[Tài xế đến điểm đón]
-    K --> L[Trạng thái: DA_DEN_DIEM_DON]
-    L --> M[Tài xế đón khách]
-    M --> N[Trạng thái: DA_DON_KHACH]
-    N --> O[Thực hiện chuyến]
-    O --> P[Trạng thái: DANG_DI_CHUYEN]
-    P --> Q[Hoàn thành chuyến]
-    Q --> R[Trạng thái: HOAN_THANH]
+quadrantChart
+    title Stakeholder Matrix - CAB System
+    x-axis "Mức độ quan tâm thấp" --> "Mức độ quan tâm cao"
+    y-axis "Mức độ ảnh hưởng thấp" --> "Mức độ ảnh hưởng cao"
+    quadrant-1 "Quản lý chặt chẽ"
+    quadrant-2 "Giữ hài lòng"
+    quadrant-3 "Theo dõi"
+    quadrant-4 "Giữ thông tin"
+    
+    "Ban giám đốc ABC": [0.75, 0.95]
+    "Khách hàng": [0.90, 0.65]
+    "Tài xế": [0.85, 0.55]
+    "Nhân viên vận hành": [0.90, 0.80]
+    "NCC thanh toán": [0.55, 0.65]
+    "NCC thông báo": [0.40, 0.45]
 ```
----
 
 # . CHUYỂN ĐỔI YÊU CẦU KHÁCH HÀNG THÀNH MỤC TIÊU NGHIỆP VỤ
 
